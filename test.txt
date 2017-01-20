@@ -1,1 +1,17 @@
-hello
+Working Just on a Local Machine
+
+
+https://github.com/rlminers/rick.git
+
+
+git pull - updates your repository
+you may now edit as much as you like, save when you are done
+
+git status (shows you which files you have modified)
+
+git add FilesYouHaveModified (you want to git add every file you have modified during your editing)
+
+git commit (to commit changes you have made to your local repository
+
+git push (will send all your edits to the repository hosted on github so that anyone else can pull those updates and continue working
+
