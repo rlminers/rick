@@ -1,0 +1,7 @@
+crosscheck backup;
+crosscheck archivelog all;
+delete noprompt obsolete;
+delete expired backupset;
+delete expired archivelog all;
+delete noprompt obsolete;
+
