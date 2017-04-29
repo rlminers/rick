@@ -1,0 +1,72 @@
+[dbaasstby:+ASM1] 15:28:37 ~ > timeout 2 bash -c "</dev/tcp/10.0.1.22/1521"; echo $?
+0
+[dbaasstby:+ASM1] 15:28:59 ~ > java -jar oratcptest.jar 10.0.1.22 -mode=sync -length=0 -duration=1s -interval=1s -port=1521
+[Requesting a test]
+	Message payload        = 0 bytes
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = SYNC
+	Disk write             = NO
+	Statistics interval    = 1 second
+	Test duration          = 1 second
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(15:29:08) The server is ready.
+                        Throughput                 Latency
+(15:29:09)          0.016 Mbytes/s                0.722 ms
+(15:29:09) Test finished.
+	       Socket send buffer = 166400 bytes
+	          Avg. throughput = 0.016 Mbytes/s
+	             Avg. latency = 0.724 ms
+
+[dbaasstby:+ASM1] 15:29:09 ~ > java -jar oratcptest.jar 10.0.1.22 -mode=sync -length=0 -duration=1s -interval=1s -port=1521
+[Requesting a test]
+	Message payload        = 0 bytes
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = SYNC
+	Disk write             = NO
+	Statistics interval    = 1 second
+	Test duration          = 1 second
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(15:29:40) The server is ready.
+                        Throughput                 Latency
+(15:29:41)          0.016 Mbytes/s                0.717 ms
+(15:29:41) Test finished.
+	       Socket send buffer = 166400 bytes
+	          Avg. throughput = 0.016 Mbytes/s
+	             Avg. latency = 0.718 ms
+
+[dbaasstby:+ASM1] 15:29:41 ~ > java -jar oratcptest.jar 10.0.1.22 -mode=sync -length=0 -duration=1s -interval=1s -port=1521
+[Requesting a test]
+	Message payload        = 0 bytes
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = SYNC
+	Disk write             = NO
+	Statistics interval    = 1 second
+	Test duration          = 1 second
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(15:29:47) The server is ready.
+                        Throughput                 Latency
+(15:29:48)          0.016 Mbytes/s                0.716 ms
+(15:29:48) Test finished.
+	       Socket send buffer = 166400 bytes
+	          Avg. throughput = 0.016 Mbytes/s
+	             Avg. latency = 0.717 ms
+
+

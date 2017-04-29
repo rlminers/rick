@@ -1,11 +1,9 @@
 Working Just on a Local Machine
 
-
 https://github.com/rlminers/rick.git
 
 git config user.email "rlminers@gmail.com"
 git config user.name "Rick Miners"
-
 
 git pull - updates your repository
 you may now edit as much as you like, save when you are done
