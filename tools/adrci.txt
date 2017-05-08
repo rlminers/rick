@@ -1,0 +1,52 @@
+
+-- adrci
+-- show incident
+-- ips create package
+
+[enkdb01:oracle:+ASM1] /home/oracle
+> adrci
+
+adrci> show homes
+
+adrci> set homepath diag/rdbms/exadb/exadb1
+
+adrci> show homes
+ADR Homes:
+diag/rdbms/exadb/exadb1
+
+
+adrci> show incident
+
+ADR Home = /u01/app/oracle/diag/rdbms/exadb/exadb1:
+*************************************************************************
+INCIDENT_ID          PROBLEM_KEY                                                 CREATE_TIME  
+-------------------- ----------------------------------------------------------- ----------------------------------------
+457                  ORA 4031                                                    2012-03-27 08:57:18.244000 -05:00
+1 rows fetched
+
+adrci> show incident -mode DETAIL -p "incident_id=457"
+
+adrci> ips create package incident 457
+Created package 1 based on incident id 457, correlation level typical
+
+-- ---------------------------------------------------------------------
+-- Examples of creating the physical package
+-- ---------------------------------------------------------------------
+ips generate package 1 in /u01/app/oracle/diag
+
+ips generate package 1 in /u01/app/oracle/diag incremental
+
+
+You can add files to an existing package by using the following command:
+Note that you can add only those files that are located in the ADR directory hierarchy (under the ADR base).
+ips add file <file_name> package <package_number>
+
+
+adrci> ips generate package 1 in /u01/app/oracle/diag
+Generated package 1 in file /u01/app/oracle/diag/ORA4031_20120503100153_COM_1.zip, mode complete
+
+
+adrci> ips finalize package 1
+Finalized package 1
+
+You can send the file to Oracle support now:
