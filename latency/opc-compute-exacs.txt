@@ -1,0 +1,236 @@
+[opc@csapex ~]$ ./latency-throughput-tests.sh CLIENT 129.152.165.72 1521
+/usr/bin/nc
+USE_NC = 0
+CMD = nc -z -w1 129.152.165.72 1521
+Connection to 129.152.165.72 1521 port [tcp/ncube-lm] succeeded!
+java -jar oratcptest.jar 129.152.165.72 -mode=sync -length=0 -duration=1s -interval=1s -port=1521
+[Requesting a test]
+	Message payload        = 0 bytes
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = SYNC
+	Disk write             = NO
+	Statistics interval    = 1 second
+	Test duration          = 1 second
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(11:06:05) The server is ready.
+                        Throughput                 Latency
+(11:06:06)          0.000 Mbytes/s               27.653 ms
+(11:06:06) Test finished.
+	       Socket send buffer = 43520 bytes
+	          Avg. throughput = 0.000 Mbytes/s
+	             Avg. latency = 27.652 ms
+
+java -jar oratcptest.jar 129.152.165.72 -mode=async -duration=10s -interval=2s -port=1521
+[Requesting a test]
+	Message payload        = 1 Mbyte
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = ASYNC
+	Disk write             = NO
+	Statistics interval    = 2 seconds
+	Test duration          = 10 seconds
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(11:06:06) The server is ready.
+                        Throughput
+(11:06:08)         87.652 Mbytes/s
+(11:06:10)        105.408 Mbytes/s
+(11:06:12)         99.423 Mbytes/s
+(11:06:14)        105.226 Mbytes/s
+(11:06:16)        102.811 Mbytes/s
+(11:06:16) Test finished.
+	       Socket send buffer = 2 Mbytes
+	          Avg. throughput = 100.132 Mbytes/s
+
+
+
+
+
+[opc@csapex ~]$ ./latency-throughput-tests.sh CLIENT 129.152.165.72 1521
+/usr/bin/nc
+USE_NC = 0
+CMD = nc -z -w1 129.152.165.72 1521
+Connection to 129.152.165.72 1521 port [tcp/ncube-lm] succeeded!
+java -jar oratcptest.jar 129.152.165.72 -mode=sync -length=0 -duration=1s -interval=1s -port=1521
+[Requesting a test]
+	Message payload        = 0 bytes
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = SYNC
+	Disk write             = NO
+	Statistics interval    = 1 second
+	Test duration          = 1 second
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(11:07:43) The server is ready.
+                        Throughput                 Latency
+(11:07:44)          0.000 Mbytes/s               23.148 ms
+(11:07:44) Test finished.
+	       Socket send buffer = 43520 bytes
+	          Avg. throughput = 0.000 Mbytes/s
+	             Avg. latency = 23.148 ms
+
+java -jar oratcptest.jar 129.152.165.72 -mode=async -duration=10s -interval=2s -port=1521
+[Requesting a test]
+	Message payload        = 1 Mbyte
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = ASYNC
+	Disk write             = NO
+	Statistics interval    = 2 seconds
+	Test duration          = 10 seconds
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(11:07:45) The server is ready.
+                        Throughput
+(11:07:47)        107.269 Mbytes/s
+(11:07:49)        124.790 Mbytes/s
+(11:07:51)        126.199 Mbytes/s
+(11:07:53)        125.921 Mbytes/s
+(11:07:55)        122.811 Mbytes/s
+(11:07:55) Test finished.
+	       Socket send buffer = 2 Mbytes
+	          Avg. throughput = 121.340 Mbytes/s
+
+
+
+
+
+[opc@csapex ~]$ ./latency-throughput-tests.sh CLIENT 129.152.165.72 1521
+/usr/bin/nc
+USE_NC = 0
+CMD = nc -z -w1 129.152.165.72 1521
+Connection to 129.152.165.72 1521 port [tcp/ncube-lm] succeeded!
+java -jar oratcptest.jar 129.152.165.72 -mode=sync -length=0 -duration=1s -interval=1s -port=1521
+[Requesting a test]
+	Message payload        = 0 bytes
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = SYNC
+	Disk write             = NO
+	Statistics interval    = 1 second
+	Test duration          = 1 second
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(11:09:02) The server is ready.
+                        Throughput                 Latency
+(11:09:03)          0.000 Mbytes/s               25.271 ms
+(11:09:03) Test finished.
+	       Socket send buffer = 43520 bytes
+	          Avg. throughput = 0.000 Mbytes/s
+	             Avg. latency = 25.271 ms
+
+java -jar oratcptest.jar 129.152.165.72 -mode=async -duration=10s -interval=2s -port=1521
+[Requesting a test]
+	Message payload        = 1 Mbyte
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = ASYNC
+	Disk write             = NO
+	Statistics interval    = 2 seconds
+	Test duration          = 10 seconds
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(11:09:04) The server is ready.
+                        Throughput
+(11:09:06)         95.679 Mbytes/s
+(11:09:08)        115.420 Mbytes/s
+(11:09:10)        113.049 Mbytes/s
+(11:09:12)        114.743 Mbytes/s
+(11:09:14)        115.717 Mbytes/s
+(11:09:14) Test finished.
+	       Socket send buffer = 2 Mbytes
+	          Avg. throughput = 110.861 Mbytes/s
+
+
+
+
+
+
+
+
+
+[opc@csapex ~]$ ./latency-throughput-tests.sh CLIENT 129.152.165.71 1521
+/usr/bin/nc
+USE_NC = 0
+CMD = nc -z -w1 129.152.165.71 1521
+Connection to 129.152.165.71 1521 port [tcp/ncube-lm] succeeded!
+java -jar oratcptest.jar 129.152.165.71 -mode=sync -length=0 -duration=1s -interval=1s -port=1521
+[Requesting a test]
+	Message payload        = 0 bytes
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = SYNC
+	Disk write             = NO
+	Statistics interval    = 1 second
+	Test duration          = 1 second
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(11:13:40) The server is ready.
+                        Throughput                 Latency
+(11:13:41)          0.000 Mbytes/s               23.208 ms
+(11:13:41) Test finished.
+	       Socket send buffer = 43520 bytes
+	          Avg. throughput = 0.000 Mbytes/s
+	             Avg. latency = 23.208 ms
+
+java -jar oratcptest.jar 129.152.165.71 -mode=async -duration=10s -interval=2s -port=1521
+[Requesting a test]
+	Message payload        = 1 Mbyte
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = ASYNC
+	Disk write             = NO
+	Statistics interval    = 2 seconds
+	Test duration          = 10 seconds
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(11:13:42) The server is ready.
+                        Throughput
+(11:13:44)        108.201 Mbytes/s
+(11:13:46)        124.976 Mbytes/s
+(11:13:48)        126.167 Mbytes/s
+(11:13:50)        126.110 Mbytes/s
+(11:13:52)        121.793 Mbytes/s
+(11:13:52) Test finished.
+	       Socket send buffer = 2 Mbytes
+	          Avg. throughput = 121.344 Mbytes/s
+
+
+
+
+

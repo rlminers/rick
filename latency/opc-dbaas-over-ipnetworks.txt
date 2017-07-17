@@ -1,0 +1,180 @@
+[opc@js ~]$ java -jar oratcptest.jar 10.0.0.4 -mode=sync -length=0 -duration=1s -interval=1s -port=1521
+[Requesting a test]
+	Message payload        = 0 bytes
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = SYNC
+	Disk write             = NO
+	Statistics interval    = 1 second
+	Test duration          = 1 second
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(14:42:24) The server is ready.
+                        Throughput                 Latency
+(14:42:25)          0.045 Mbytes/s                0.255 ms
+(14:42:25) Test finished.
+	       Socket send buffer = 166400 bytes
+	          Avg. throughput = 0.045 Mbytes/s
+	             Avg. latency = 0.255 ms
+
+[opc@js ~]$ java -jar oratcptest.jar 10.0.0.4 -mode=sync -length=0 -duration=1s -interval=1s -port=1521
+[Requesting a test]
+	Message payload        = 0 bytes
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = SYNC
+	Disk write             = NO
+	Statistics interval    = 1 second
+	Test duration          = 1 second
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(14:45:06) The server is ready.
+                        Throughput                 Latency
+(14:45:07)          0.041 Mbytes/s                0.276 ms
+(14:45:07) Test finished.
+	       Socket send buffer = 166400 bytes
+	          Avg. throughput = 0.041 Mbytes/s
+	             Avg. latency = 0.276 ms
+
+[opc@js ~]$ java -jar oratcptest.jar 10.0.0.4 -mode=sync -length=0 -duration=1s -interval=1s -port=1521
+[Requesting a test]
+	Message payload        = 0 bytes
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = SYNC
+	Disk write             = NO
+	Statistics interval    = 1 second
+	Test duration          = 1 second
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(14:45:10) The server is ready.
+                        Throughput                 Latency
+(14:45:11)          0.041 Mbytes/s                0.276 ms
+(14:45:11) Test finished.
+	       Socket send buffer = 166400 bytes
+	          Avg. throughput = 0.041 Mbytes/s
+	             Avg. latency = 0.276 ms
+
+
+
+
+
+
+
+[opc@js ~]$ java -jar oratcptest.jar 10.0.0.4 -mode=async -duration=10s -interval=2s -port=1521
+[Requesting a test]
+	Message payload        = 1 Mbyte
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = ASYNC
+	Disk write             = NO
+	Statistics interval    = 2 seconds
+	Test duration          = 10 seconds
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(14:39:57) The server is ready.
+                        Throughput
+(14:39:59)        681.391 Mbytes/s
+(14:40:01)        745.427 Mbytes/s
+(14:40:03)        717.507 Mbytes/s
+(14:40:05)        738.748 Mbytes/s
+(14:40:07)        774.459 Mbytes/s
+(14:40:07) Test finished.
+	       Socket send buffer = 2 Mbytes
+	          Avg. throughput = 731.099 Mbytes/s
+
+[opc@js ~]$ java -jar oratcptest.jar 10.0.0.4 -mode=async -duration=10s -interval=2s -port=1521
+[Requesting a test]
+	Message payload        = 1 Mbyte
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = ASYNC
+	Disk write             = NO
+	Statistics interval    = 2 seconds
+	Test duration          = 10 seconds
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(14:48:24) The server is ready.
+                        Throughput
+(14:48:26)        593.260 Mbytes/s
+(14:48:28)        631.360 Mbytes/s
+(14:48:30)        495.966 Mbytes/s
+(14:48:32)        581.776 Mbytes/s
+(14:48:34)        605.594 Mbytes/s
+(14:48:34) Test finished.
+	       Socket send buffer = 2 Mbytes
+	          Avg. throughput = 581.269 Mbytes/s
+
+[opc@js ~]$ java -jar oratcptest.jar 10.0.0.4 -mode=async -duration=10s -interval=2s -port=1521
+[Requesting a test]
+	Message payload        = 1 Mbyte
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = ASYNC
+	Disk write             = NO
+	Statistics interval    = 2 seconds
+	Test duration          = 10 seconds
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(14:48:51) The server is ready.
+                        Throughput
+(14:48:53)        643.312 Mbytes/s
+(14:48:55)        694.685 Mbytes/s
+(14:48:57)        639.710 Mbytes/s
+(14:48:59)        664.692 Mbytes/s
+(14:49:01)        678.722 Mbytes/s
+(14:49:01) Test finished.
+	       Socket send buffer = 2 Mbytes
+	          Avg. throughput = 663.657 Mbytes/s
+
+
+[opc@js ~]$ java -jar oratcptest.jar 10.0.0.4 -mode=async -duration=10s -interval=2s -port=1521
+[Requesting a test]
+	Message payload        = 1 Mbyte
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = ASYNC
+	Disk write             = NO
+	Statistics interval    = 2 seconds
+	Test duration          = 10 seconds
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(14:49:39) The server is ready.
+                        Throughput
+(14:49:41)        538.478 Mbytes/s
+(14:49:43)        567.725 Mbytes/s
+(14:49:45)        662.643 Mbytes/s
+(14:49:47)        711.559 Mbytes/s
+(14:49:49)        723.091 Mbytes/s
+(14:49:49) Test finished.
+	       Socket send buffer = 2 Mbytes
+	          Avg. throughput = 640.506 Mbytes/s
+

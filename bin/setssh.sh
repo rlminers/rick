@@ -81,8 +81,8 @@ Host AlphaDBCS
   LocalForward 4848 ${IP}:4848
 
   # Enterprise Manager
-  # https://localhost:5500/em  ..... username=sys
-  LocalForward 5500 ${IP}:5500
+  # https://localhost:5501/em  ..... username=sys
+  LocalForward 5501 ${IP}:5501
 
   ServerAliveInterval 60
   StrictHostKeyChecking no
