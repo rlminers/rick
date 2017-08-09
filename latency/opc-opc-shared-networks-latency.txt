@@ -1,0 +1,170 @@
+[opc@csapex ~]$ ./latency-throughput-tests.sh SERVER 10.196.242.174 5555
+/usr/bin/nc
+USE_NC = 0
+CMD = nc -z -w1 10.196.242.174 5555
+java -jar oratcptest.jar -server 10.196.242.174 -port=5555
+]0;opc@csapex:~[opc@csapex ~]$ ./latency-throughput-tests.sh SERVER 10.196.242.174 5555[1P[1P[1P[1P[1P[1P[1@C[1@L[1@I[1@E[1@N[1@T
+/usr/bin/nc
+USE_NC = 0
+CMD = nc -z -w1 10.196.242.174 5555
+Connection to 10.196.242.174 5555 port [tcp/personal-agent] succeeded!
+java -jar oratcptest.jar 10.196.242.174 -mode=sync -length=0 -duration=1s -interval=1s -port=5555
+[Requesting a test]
+	Message payload        = 0 bytes
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = SYNC
+	Disk write             = NO
+	Statistics interval    = 1 second
+	Test duration          = 1 second
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(22:43:49) The server is ready.
+                        Throughput                 Latency
+(22:43:50)          0.036 Mbytes/s                0.317 ms
+(22:43:50) Test finished.
+	       Socket send buffer = 43520 bytes
+	          Avg. throughput = 0.036 Mbytes/s
+	             Avg. latency = 0.317 ms
+
+java -jar oratcptest.jar 10.196.242.174 -mode=async -duration=10s -interval=2s -port=5555
+[Requesting a test]
+	Message payload        = 1 Mbyte
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = ASYNC
+	Disk write             = NO
+	Statistics interval    = 2 seconds
+	Test duration          = 10 seconds
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(22:43:50) The server is ready.
+                        Throughput
+(22:43:52)        639.491 Mbytes/s
+(22:43:54)        609.276 Mbytes/s
+(22:43:56)        460.262 Mbytes/s
+(22:43:58)        579.913 Mbytes/s
+(22:44:00)        647.739 Mbytes/s
+(22:44:00) Test finished.
+	       Socket send buffer = 2 Mbytes
+	          Avg. throughput = 586.939 Mbytes/s
+
+]0;opc@csapex:~[opc@csapex ~]$ ./latency-throughput-tests.sh CLIENT 10.196.242.174 5555
+/usr/bin/nc
+USE_NC = 0
+CMD = nc -z -w1 10.196.242.174 5555
+Connection to 10.196.242.174 5555 port [tcp/personal-agent] succeeded!
+java -jar oratcptest.jar 10.196.242.174 -mode=sync -length=0 -duration=1s -interval=1s -port=5555
+[Requesting a test]
+	Message payload        = 0 bytes
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = SYNC
+	Disk write             = NO
+	Statistics interval    = 1 second
+	Test duration          = 1 second
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(22:45:17) The server is ready.
+                        Throughput                 Latency
+(22:45:18)          0.040 Mbytes/s                0.289 ms
+(22:45:18) Test finished.
+	       Socket send buffer = 43520 bytes
+	          Avg. throughput = 0.040 Mbytes/s
+	             Avg. latency = 0.289 ms
+
+java -jar oratcptest.jar 10.196.242.174 -mode=async -duration=10s -interval=2s -port=5555
+[Requesting a test]
+	Message payload        = 1 Mbyte
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = ASYNC
+	Disk write             = NO
+	Statistics interval    = 2 seconds
+	Test duration          = 10 seconds
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(22:45:18) The server is ready.
+                        Throughput
+(22:45:20)        611.583 Mbytes/s
+(22:45:22)        660.511 Mbytes/s
+(22:45:24)        560.010 Mbytes/s
+(22:45:26)        587.930 Mbytes/s
+(22:45:28)        636.359 Mbytes/s
+(22:45:28) Test finished.
+	       Socket send buffer = 2 Mbytes
+	          Avg. throughput = 610.853 Mbytes/s
+
+]0;opc@csapex:~[opc@csapex ~]$ ./latency-throughput-tests.sh CLIENT 10.196.242.174 5555
+/usr/bin/nc
+USE_NC = 0
+CMD = nc -z -w1 10.196.242.174 5555
+Connection to 10.196.242.174 5555 port [tcp/personal-agent] succeeded!
+java -jar oratcptest.jar 10.196.242.174 -mode=sync -length=0 -duration=1s -interval=1s -port=5555
+[Requesting a test]
+	Message payload        = 0 bytes
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = SYNC
+	Disk write             = NO
+	Statistics interval    = 1 second
+	Test duration          = 1 second
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(22:47:44) The server is ready.
+                        Throughput                 Latency
+(22:47:45)          0.031 Mbytes/s                0.374 ms
+(22:47:45) Test finished.
+	       Socket send buffer = 43520 bytes
+	          Avg. throughput = 0.031 Mbytes/s
+	             Avg. latency = 0.374 ms
+
+java -jar oratcptest.jar 10.196.242.174 -mode=async -duration=10s -interval=2s -port=5555
+[Requesting a test]
+	Message payload        = 1 Mbyte
+	Payload content type   = RANDOM
+	Delay between messages = NO
+	Number of connections  = 1
+	Socket send buffer     = (system default)
+	Transport mode         = ASYNC
+	Disk write             = NO
+	Statistics interval    = 2 seconds
+	Test duration          = 10 seconds
+	Test frequency         = NO
+	Network Timeout        = NO
+	(1 Mbyte = 1024x1024 bytes)
+
+(22:47:45) The server is ready.
+                        Throughput
+(22:47:47)        521.377 Mbytes/s
+(22:47:49)        678.438 Mbytes/s
+(22:47:51)        651.520 Mbytes/s
+(22:47:53)        666.963 Mbytes/s
+(22:47:55)        671.494 Mbytes/s
+(22:47:55) Test finished.
+	       Socket send buffer = 2 Mbytes
+	          Avg. throughput = 637.601 Mbytes/s
+
+]0;opc@csapex:~[opc@csapex ~]$ exit
+logout
+Connection to 129.144.31.139 closed.
