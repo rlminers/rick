@@ -3,6 +3,9 @@
 # db1nvme : 129.146.17.108
 # db2nvme : 129.146.3.211
 
+# bmc
+# psapp1 : 129.146.28.131 10.10.7.2
+
 HN=`hostname`
 CWD=/home/oracle/failover/scripts
 SSH_KEY_FILE=${CWD}/BareMetal_openssh

@@ -139,17 +139,7 @@
         <RefreshRate>1</RefreshRate>
         <OverviewCharts>
             <OverviewChart>
-                <Name>Disk</Name>
-                <MinimumValue>2.147483647E9</MinimumValue>
-                <MaximumValue>2.147483647E9</MaximumValue>
-            </OverviewChart>
-            <OverviewChart>
-                <Name>CPU</Name>
-                <MinimumValue>2.147483647E9</MinimumValue>
-                <MaximumValue>2.147483647E9</MaximumValue>
-            </OverviewChart>
-            <OverviewChart>
-                <Name>Response Time</Name>
+                <Name>Transactions Per Minute</Name>
                 <MinimumValue>2.147483647E9</MinimumValue>
                 <MaximumValue>2.147483647E9</MaximumValue>
             </OverviewChart>
@@ -159,7 +149,17 @@
                 <MaximumValue>2.147483647E9</MaximumValue>
             </OverviewChart>
             <OverviewChart>
-                <Name>Transactions Per Minute</Name>
+                <Name>Response Time</Name>
+                <MinimumValue>2.147483647E9</MinimumValue>
+                <MaximumValue>2.147483647E9</MaximumValue>
+            </OverviewChart>
+            <OverviewChart>
+                <Name>CPU</Name>
+                <MinimumValue>2.147483647E9</MinimumValue>
+                <MaximumValue>2.147483647E9</MaximumValue>
+            </OverviewChart>
+            <OverviewChart>
+                <Name>Disk</Name>
                 <MinimumValue>2.147483647E9</MinimumValue>
                 <MaximumValue>2.147483647E9</MaximumValue>
             </OverviewChart>

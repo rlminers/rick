@@ -3,26 +3,37 @@
 # ############################
 # ############################
 # OPC | AWS | ExaCld | X4
-CLOUD=bmc
-SERVICE=oda-rac-72cpu-count
+CLOUD=ExaCS_BMC
+SERVICE=half-rack
 
 # vanilla | dbtuning
 TEST_TYPE=dbtuning
 
 # connect string
 HOST_NAME=`hostname`
-DB_SERVICE=odapdb1.aeg
+DB_SERVICE=pdb1.exacsmainsn.dnsvcnaeg.oraclevcn.com
+HOST1=exacsnode-jw00z1
+HOST2=exacsnode-jw00z2
+HOST3=exacsnode-jw00z3
+HOST4=exacsnode-jw00z4
 CS="//${HOST_NAME}/${DB_SERVICE}"
 # ############################
 # ############################
 
-CF=swingconfig-10mins.xml
+# soe
+# CF=swingconfig-10mins.xml
+# sh
+CF=shconfig-5mins.xml
+
 CWD=`pwd`
 PREFIX="${CLOUD}_${SERVICE}_${TEST_TYPE}_Cluster"
 LOG_DIR=${CWD}/benchmark/${CLOUD}/${PREFIX}
 if [ ! -d $LOG_DIR ]
 then
   mkdir -p $LOG_DIR
+else
+  echo "Directory already exists.  Please update variables to choose another directory."
+  exit 1
 fi
 
 PATH=.:$PATH
@@ -42,9 +53,10 @@ echo "INSTNUM = $INSTNUM"
 mv db-info.txt $LOG_DIR
 
 # User Counts
-USER_COUNTS="100 200 300 400 500 600"
+USER_COUNTS="4 8"
 # start nmon
-nmon -F $LOG_DIR/${PREFIX}.nmon -T -s 60 -c 64
+nmon -F $LOG_DIR/${PREFIX}.nmon -T -s 60 -c 10
+sleep 5
 
 # ############################
 # main
@@ -62,11 +74,11 @@ do
   echo "snap 1 = $snap1"
 
   # run charbench
-echo "Starting Coordinator ..."
+  echo "Starting Coordinator ..."
   ${CWD}/coordinator -c &
-sleep 5
+  sleep 5
 
-  COMMAND="${CWD}/charbench -g group1 -c $CF -cs //odanode1/odapdb1.aeg -uc $i -r $LOG_DIR/${PREFIX}-${UC}-node1-swingbench.xml -co localhost"
+  COMMAND="${CWD}/charbench -g group1 -c $CF -cs //${HOST1}/${DB_SERVICE} -uc $i -r $LOG_DIR/${PREFIX}-${UC}-node1-swingbench.xml -co localhost"
   echo "#!/bin/sh" > lg1.sh
   echo $COMMAND >> lg1.sh
   chmod 755 lg1.sh
@@ -74,7 +86,7 @@ sleep 5
   ${CWD}/lg1.sh &
   sleep 3
 
-  COMMAND="${CWD}/charbench -g group1 -c $CF -cs //odanode2/odapdb1.aeg -uc $i -r $LOG_DIR/${PREFIX}-${UC}-node2-swingbench.xml -co localhost"
+  COMMAND="${CWD}/charbench -g group1 -c $CF -cs //${HOST2}/${DB_SERVICE} -uc $i -r $LOG_DIR/${PREFIX}-${UC}-node2-swingbench.xml -co localhost"
   echo "#!/bin/sh" > lg2.sh
   echo $COMMAND >> lg2.sh
   chmod 755 lg2.sh
@@ -82,15 +94,31 @@ sleep 5
   ${CWD}/lg2.sh &
   sleep 3
 
-echo "Starting all load generators ... "
+  COMMAND="${CWD}/charbench -g group1 -c $CF -cs //${HOST3}/${DB_SERVICE} -uc $i -r $LOG_DIR/${PREFIX}-${UC}-node3-swingbench.xml -co localhost"
+  echo "#!/bin/sh" > lg3.sh
+  echo $COMMAND >> lg3.sh
+  chmod 755 lg3.sh
+  echo "Adding load generator 3 ..."
+  ${CWD}/lg3.sh &
+  sleep 3
+
+  COMMAND="${CWD}/charbench -g group1 -c $CF -cs //${HOST4}/${DB_SERVICE} -uc $i -r $LOG_DIR/${PREFIX}-${UC}-node4-swingbench.xml -co localhost"
+  echo "#!/bin/sh" > lg4.sh
+  echo $COMMAND >> lg4.sh
+  chmod 755 lg4.sh
+  echo "Adding load generator 4 ..."
+  ${CWD}/lg4.sh &
+  sleep 3
+
+  echo "Starting all load generators ... "
   ${CWD}/coordinator -runall
   sleep 5
   ${CWD}/coordinator -status
 
-echo "Waiting 10 mins ..."
-  sleep 600
+  echo "Waiting 5 mins ..."
+  sleep 300
 
-echo "Stopping all load generators ... "
+  echo "Stopping all load generators ... "
 
   ${CWD}/coordinator -stopall
   ${CWD}/coordinator -kill
