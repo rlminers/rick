@@ -29,8 +29,10 @@ BEGIN
     dbms_scheduler.create_credential(
         credential_name => 'ORACLE_CRED',
         username => 'oracle',
-        password => 'welcome1'
+        password => 'Enk1tec_Aeg1'
     );
 END;
 /
+
+-- Enk1tecAeg$2
 
