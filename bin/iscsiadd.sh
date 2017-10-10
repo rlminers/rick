@@ -1,4 +1,5 @@
 #!/bin/bash
+# https://community.oracle.com/community/oracle-cloud/cloud-infrastructure/blog/2017/06
  
 BASEADDR="169.254.2.2"
  
