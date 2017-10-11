@@ -1,0 +1,105 @@
+
+# ------------------------------------
+# list all the running databases
+# ------------------------------------
+#
+# -- prf/dr env
+#
+[oracle@lpcldv0225m ~]$ ps -ef | grep pmon
+grid      31710      1  0 Sep22 ?        00:02:05 asm_pmon_+ASM1
+grid      33975      1  0 Sep22 ?        00:01:15 mdb_pmon_-MGMTDB
+oracle    41337  41085  0 22:27 pts/0    00:00:00 grep pmon
+oracle    63293      1  0 Sep22 ?        00:02:19 ora_pmon_STGMOM1
+oracle    99786      1  0 Sep29 ?        00:02:32 ora_pmon_OIDDB1
+oracle   201613      1  0 Sep29 ?        00:01:39 ora_pmon_DBATEST1
+oracle   214049      1  0 Sep28 ?        00:01:49 ora_pmon_PRF01M1
+oracle   348067      1  0 Sep29 ?        00:01:41 ora_pmon_PRF01R1
+
+
+# -- prod/stg env
+#
+[oracle@cfcldv0684m ~]$ ps -ef | grep pmon
+grid      37075      1  0 Sep29 ?        00:01:00 asm_pmon_+ASM2
+oracle   115989      1  0 Oct09 ?        00:00:09 ora_pmon_STG01M2
+oracle   163676 162734  0 23:46 pts/0    00:00:00 grep pmon
+oracle   214581      1  0 Oct01 ?        00:00:59 ora_pmon_PRD01R2
+oracle   240733      1  0 Oct06 ?        00:00:28 ora_pmon_PRD01M2
+oracle   253124      1  0 Oct01 ?        00:01:44 ora_pmon_OIDDB2
+oracle   379432      1  0 Oct01 ?        00:00:59 ora_pmon_STG01R2
+
+
+
+
+
+# ------------------------------------
+# stop DBs
+# ------------------------------------
+srvctl stop database -d DBATEST
+srvctl stop database -d PRF01M
+srvctl stop database -d PRF01R
+srvctl stop database -d OIDDB
+srvctl stop database -d STGMOM
+
+srvctl stop database -d STG01M
+srvctl stop database -d PRD01R
+srvctl stop database -d PRD01M
+srvctl stop database -d OIDDB
+srvctl stop database -d STG01R 
+
+# ------------------------------------
+# stop crs - on all nodes
+# ------------------------------------
+root> /u01/app/12.1.0.2/grid/bin/crsctl stop crs
+
+# ------------------------------------
+# timezone changes
+# ------------------------------------
+cat /etc/sysconfig/clock
+cp -p /etc/sysconfig/clock /etc/sysconfig/clock.2017OCT10
+# America/Los_Angeles
+cp /etc/localtime /root/old.timezone
+ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+
+
+cp -p /opt/oracle.cellos/cell.conf /opt/oracle.cellos/cell.conf.2017OCT10
+# America/Los_Angeles
+
+
+cd /u01/app/12.1.0.2/grid/crs/install
+cp -p s_crsconfig_lpcldv0225m_env.txt s_crsconfig_lpcldv0225m_env.txt.2017OCT10
+# America/Los_Angeles
+cp -p s_crsconfig_lpcldv0226m_env.txt s_crsconfig_lpcldv0226m_env.txt.2017OCT10
+# America/Los_Angeles
+
+
+cp -p s_crsconfig_cfcldv0683m_env.txt s_crsconfig_cfcldv0683m_env.txt.2017OCT10
+# America/Los_Angeles
+cp -p s_crsconfig_cfcldv0684m_env.txt s_crsconfig_cfcldv0684m_env.txt.2017OCT10
+# America/Los_Angeles
+
+
+
+# ------------------------------------
+# restart crs
+# ------------------------------------
+/u01/app/12.1.0.2/grid/bin/crsctl start crs
+
+
+
+# ------------------------------------
+# restart DBs
+# ------------------------------------
+srvctl start database -d DBATEST
+srvctl start database -d PRF01M
+srvctl start database -d PRF01R
+srvctl start database -d OIDDB
+srvctl start database -d STGMOM
+
+
+srvctl start database -d STG01M
+srvctl start database -d PRD01R
+srvctl start database -d PRD01M
+srvctl start database -d OIDDB
+srvctl start database -d STG01R 
+
+# ------------------------------------
