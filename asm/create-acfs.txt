@@ -1,0 +1,109 @@
+# ######################################################################
+1. To create a volume:
+# ######################################################################
+
+# PRD
+ASMCMD [+] > volcreate -G datac1 -s 100G ogg_volume1
+
+# DR
+ASMCMD [+] > volcreate -G datac3 -s 100G ogg_volume1
+
+
+
+
+# ######################################################################
+2. Determine the device name of the volume that was created
+# ######################################################################
+
+# PRD
+ASMCMD [+] > volinfo -G datac1 ogg_volume1
+
+Diskgroup Name: DATAC1
+
+         Volume Name: OGG_VOLUME1
+         Volume Device: /dev/asm/ogg_volume1-154
+         State: ENABLED
+         Size (MB): 102400
+         Resize Unit (MB): 64
+         Redundancy: HIGH
+         Stripe Columns: 8
+         Stripe Width (K): 1024
+         Usage:
+         Mountpath:
+
+
+# DR
+ASMCMD [+] > volinfo -G datac3 ogg_volume1
+
+Diskgroup Name: DATAC3
+
+         Volume Name: OGG_VOLUME1
+         Volume Device: /dev/asm/ogg_volume1-306
+         State: ENABLED
+         Size (MB): 102400
+         Resize Unit (MB): 64
+         Redundancy: MIRROR
+         Stripe Columns: 8
+         Stripe Width (K): 1024
+         Usage:
+         Mountpath:
+
+
+
+
+# ######################################################################
+3. Create a file system with the Oracle ACFS mkfs command
+# ######################################################################
+
+# PRD
+$ /sbin/mkfs -t acfs /dev/asm/ogg_volume1-154
+
+mkfs.acfs: version                   = 12.1.0.2.0
+mkfs.acfs: on-disk version           = 39.0
+mkfs.acfs: volume                    = /dev/asm/ogg_volume1-154
+mkfs.acfs: volume size               = 107374182400  ( 100.00 GB )
+mkfs.acfs: Format complete.
+
+
+# DR
+$ /sbin/mkfs -t acfs /dev/asm/ogg_volume1-306
+
+mkfs.acfs: version                   = 12.1.0.2.0
+mkfs.acfs: on-disk version           = 39.0
+mkfs.acfs: volume                    = /dev/asm/ogg_volume1-306
+mkfs.acfs: volume size               = 107374182400  ( 100.00 GB )
+mkfs.acfs: Format complete.
+
+
+
+
+# ######################################################################
+4. Optionally register the file system with the acfsutil registry command.
+# ######################################################################
+
+# PRD
+$ /sbin/acfsutil registry -a /dev/asm/ogg_volume1-154 /ogg_agent_bin
+
+acfsutil registry: mount point /ogg_agent_bin successfully added to Oracle Registry
+
+
+# DR
+$ /sbin/acfsutil registry -a /dev/asm/ogg_volume1-306 /ogg_agent_bin
+
+acfsutil registry: mount point /ogg_agent_bin successfully added to Oracle Registry
+
+
+
+
+
+# ######################################################################
+5. Mount the file system with the Oracle ACFS mount command.
+   You can mount a file system before or after registering the file system.
+   If the file system has been registered, you can wait for the file system to be mounted automatically.
+# ######################################################################
+
+# /bin/mount -t acfs /dev/asm/volume1-123 /acfsmounts/acfs1
+
+# chown -R oracle:dba /acfsmounts/acfs1
+
+
