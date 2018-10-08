@@ -1,0 +1,11 @@
+---
+# tasks file for show-date
+- name: show the date
+  shell: date
+  register: showdate
+  changed_when: "'PST' not in showdate.stdout"
+  failed_when: "'EST' in showdate.stdout"
+
+- name: display the date
+  debug: msg="{{ showdate.stdout }}"
+
