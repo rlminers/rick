@@ -1,6 +1,6 @@
 Working Just on a Local Machine
 
-https://github.com/rlminers/rick.git
+git clone https://github.com/rlminers/rick.git
 
 git config user.email "rlminers@gmail.com"
 git config user.name "Rick Miners"
