@@ -39,11 +39,11 @@ def _tpt_tempdir=&SQLPATH/tmp
 
 -- some internal variables required for TPT scripts
 
-	define _ti_sequence=0
-	define _tptmode=normal
-	define _xt_seq=0
-
-  define all='"select /*+ no_merge */ sid from v$session"'
+-- 	define _ti_sequence=0
+-- 	define _tptmode=normal
+-- 	define _xt_seq=0
+-- 
+--   define all='"select /*+ no_merge */ sid from v$session"'
 
 -- you should change linesize to match terminal width - 1 only 
 -- if you don't have a terminal with horizontal scrolling
@@ -105,7 +105,7 @@ def _tpt_tempdir=&SQLPATH/tmp
 -- return control back to sqlplus immediately after launching
 -- notepad (so that you can continue typing in sqlplus
 
-	define _editor="notepad"  
+--	define _editor="notepad"  
 --	define _external_editor="/Applications/Terminator.app/Contents/MacOS/Terminator vi "  
 
 -- assign the tracefile name to trc variable
@@ -163,11 +163,11 @@ SELECT    VALUE
 
 -- set html format
 
-@@htmlset nowrap "&_user@&_connect_identifier report"
+--@@htmlset nowrap "&_user@&_connect_identifier report"
 
 -- set seminar logging file
 
-DEF _tpt_tempfile=sqlplus_tmpfile
+--DEF _tpt_tempfile=sqlplus_tmpfile
 
 col seminar_logfile new_value seminar_logfile
 col tpt_tempfile new_value _tpt_tempfile
@@ -177,7 +177,7 @@ select
   , instance_name||'-'||to_char(sysdate, 'YYYYMMDD-HH24MISS') tpt_tempfile
 from v$instance;
 
-def seminar_logfile=&SQLPATH/logs/&_tpt_tempfile..log
+--def seminar_logfile=&SQLPATH/logs/&_tpt_tempfile..log
 
 -- spool sqlplus output
 -- spool &seminar_logfile append

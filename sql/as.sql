@@ -30,17 +30,17 @@ SELECT sid, SUBSTR (program, 1, 19) prog,
 ORDER BY status, username, program, sql_id
 /
  
-col username format a30
-compute sum of sql_id_cnt on report
-break on report
- 
-SELECT status, username, count(b.sql_id) sql_id_cnt
-    FROM v$session a, v$sql b
-    WHERE username IS NOT NULL
-         AND a.sql_id = b.sql_id
-GROUP BY status, username
-ORDER BY status, username
-/
- 
+-- col username format a30
+-- compute sum of sql_id_cnt on report
+-- break on report
+--  
+-- SELECT status, username, count(b.sql_id) sql_id_cnt
+--     FROM v$session a, v$sql b
+--     WHERE username IS NOT NULL
+--          AND a.sql_id = b.sql_id
+-- GROUP BY status, username
+-- ORDER BY status, username
+-- /
+--  
 clear breaks
 
