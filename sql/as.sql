@@ -4,7 +4,7 @@ set pages 1000
 col username format a15
 col prog format a8 trunc
 col sql_text format a50 trunc
-col sid format 9999
+col sid format 9999999
 col child for 999
 col avg_etime heading "SECONDS"for 99,999.999
 col avg_htime heading "HOURS"for 999.9
