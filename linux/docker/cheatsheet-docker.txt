@@ -1,0 +1,29 @@
+docker container ls
+docker container ls -a
+docker container start <container name>
+docker container stop <container name>
+docker container rm <container name>
+
+
+docker run <image>:<version>
+docker run -d <image>:<version> --name <container name> --restart <option>
+	 -d			detach
+	--restart
+		no		default
+		on-failrue	container failure
+		always		on success or failure
+		unless-stopped	same as always unless manually stopped
+
+	 -p <host port>:<container port>
+
+	--rm			automatically rm on exit
+
+	--memory		hard limit
+
+	--memory-reservation	min reservation
+
+docker image inspect <name>:<tag> --format "{{.Architecture}}"
+
+docker image rm <image>		===	docker rmi <image>
+docker image prune
+
