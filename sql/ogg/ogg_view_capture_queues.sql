@@ -1,0 +1,4 @@
+select CAPTURE_NAME, QUEUE_NAME, STATUS from DBA_CAPTURE;
+
+select OWNER, QUEUE_TABLE, QUEUE_TYPE from dba_queues where NAME='OGG$Q_TESTEXT1';
+
