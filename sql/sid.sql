@@ -46,3 +46,10 @@ WHERE  audsid != sys_context('USERENV','SESSIONID')
 and s.sid = &search_string
 /
 
+/*
+select sid, serial#, inst_id
+from gv$session ...
+
+alter system kill session 'sid,serial#,@inst_id'
+*/
+
