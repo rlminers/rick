@@ -1,0 +1,15 @@
+
+crsctl check cluster -all
+crsctl check crs
+crsctl stat -t
+crsctl query crs activeversion
+
+cluvfy comp scan
+
+srvctl status asm
+srvctl status database -d <dbname>
+srvctl config database -d <dbname>
+srvctl status nodeapps
+
+select * from v$active_instances;
+
