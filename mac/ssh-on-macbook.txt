@@ -1,0 +1,14 @@
+How to Check if SSH Remote Login is Enabled in Mac OS via Terminal
+
+sudo systemsetup -getremotelogin
+
+
+Enable SSH on Mac from the Command Line with systemsetup
+
+sudo systemsetup -setremotelogin on
+
+
+Turn Off SSH on Mac OS with systemsetup
+
+sudo systemsetup -setremotelogin off
+
