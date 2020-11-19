@@ -1,0 +1,1742 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<displays>
+<display id="34ccc237-0170-1000-8001-c0a80134501f" type="" style="Table" enable="true">
+	<name><![CDATA[as]]></name>
+	<description><![CDATA[]]></description>
+	<tooltip><![CDATA[]]></tooltip>
+	<drillclass><![CDATA[]]></drillclass>
+	<CustomValues>
+		<TYPE><![CDATA[horizontal]]></TYPE>
+	</CustomValues>
+	<query>
+		<sql><![CDATA[SELECT sid, SUBSTR (program, 1, 19) program,
+         substr(a.machine,1,20) machine,
+         username,
+         b.sql_id,
+         child_number child,
+         plan_hash_value,
+         executions execs,
+         ROUND((elapsed_time/1000000)/decode(nvl(executions,0),0,1,executions),6) avg_etime,
+         --ROUND(((elapsed_time/1000000)/decode(nvl(executions,0),0,1,executions)/3600),2) avg_htime,
+         regexp_replace(sql_text, '[[:space:]]+',' ' ) sql_text
+    FROM v$session a, v$sql b
+    WHERE     status = 'ACTIVE'
+         AND username IS NOT NULL
+         AND a.sql_id = b.sql_id
+         AND a.sql_child_number = b.child_number
+ORDER BY status, username, program, sql_id]]></sql>
+	</query>
+		<pdf version="VERSION_1_7" compression="CONTENT">
+			<docproperty title="null" author="null" subject="null" keywords="null" />
+			<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+			<column>
+				<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+				<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+				<blob blob="NONE" zip="false" />
+			</column>
+			<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+			<header enable="false" generatedate="false">
+				<data>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				null																																																																																																																																																								</data>
+			</header>
+			<footer enable="false" generatedate="false">
+				<data value="null" />
+			</footer>
+			<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+		</pdf>
+	<display id="" type="" style="Table" enable="true">
+		<name><![CDATA[find_sql]]></name>
+		<description><![CDATA[]]></description>
+		<tooltip><![CDATA[]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[select sql_id
+, child_number as child
+, executions execs
+, ROUND(buffer_gets/decode(nvl(executions,0),0,1,executions),0) avg_lio
+, sql_text
+from v$sql s
+where sql_id = :SQL_ID
+order by 1,2]]></sql>
+			<binds>
+				<bind id="SQL_ID">
+					<prompt><![CDATA[SQL_ID]]></prompt>
+					<tooltip><![CDATA[SQL_ID]]></tooltip>
+					<value><![CDATA[NULL_VALUE]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+			</binds>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																																																																																																																																																														</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+	</display>
+	<display id="" type="" style="Table" enable="true">
+		<name><![CDATA[sqlmon_info]]></name>
+		<description><![CDATA[]]></description>
+		<tooltip><![CDATA[]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[select sid
+, sql_id
+, sql_exec_id
+, sql_exec_start
+from v$sql_monitor
+where sql_id = :SQL_ID
+order by 3 desc]]></sql>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																																																																																																																																																														</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+	</display>
+	<display id="" type="" style="Table" enable="true">
+		<name><![CDATA[waits]]></name>
+		<description><![CDATA[]]></description>
+		<tooltip><![CDATA[]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[SELECT NVL(s.username, '(oracle)') AS username,
+       s.sid,
+       s.serial#,
+       se.event,
+       se.total_waits,
+       se.total_timeouts,
+       se.time_waited/100 secs_waited,
+       ROUND(se.average_wait/100,4) avg_wait,
+       se.max_wait/100 max_wait
+       --se.time_waited_micro
+FROM   v$session_event se,
+       v$session s
+WHERE  s.sid = se.sid
+AND    s.sid = :SID
+ORDER BY se.time_waited DESC]]></sql>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																																																																				</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+	</display>
+</display>
+<display id="34d0b223-0170-1000-8002-c0a80134501f" type="" style="Table" enable="true">
+	<name><![CDATA[dba-objects]]></name>
+	<description><![CDATA[]]></description>
+	<tooltip><![CDATA[]]></tooltip>
+	<drillclass><![CDATA[]]></drillclass>
+	<CustomValues>
+		<TYPE><![CDATA[horizontal]]></TYPE>
+	</CustomValues>
+	<query>
+		<sql><![CDATA[select owner, object_name, object_type, created, last_ddl_time, status
+from dba_objects
+where owner like upper(nvl(:owner, owner))
+and object_name like upper(nvl(:obj_name, object_name))
+order by 1,2,3]]></sql>
+		<binds>
+			<bind id="owner">
+				<prompt><![CDATA[owner]]></prompt>
+				<tooltip><![CDATA[owner]]></tooltip>
+				<value><![CDATA[ASC1_DAPI]]></value>
+				<bracket><![CDATA[null]]></bracket>
+			</bind>
+			<bind id="obj_name">
+				<prompt><![CDATA[obj_name]]></prompt>
+				<tooltip><![CDATA[obj_name]]></tooltip>
+				<value><![CDATA[MONITOREDEVENTNOTEREAD]]></value>
+				<bracket><![CDATA[null]]></bracket>
+			</bind>
+		</binds>
+	</query>
+		<pdf version="VERSION_1_7" compression="CONTENT">
+			<docproperty title="null" author="null" subject="null" keywords="null" />
+			<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+			<column>
+				<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+				<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+				<blob blob="NONE" zip="false" />
+			</column>
+			<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+			<header enable="false" generatedate="false">
+				<data>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				null																																																																																																																																																								</data>
+			</header>
+			<footer enable="false" generatedate="false">
+				<data value="null" />
+			</footer>
+			<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+		</pdf>
+	<display id="" type="" style="Table" enable="true">
+		<name><![CDATA[synonym]]></name>
+		<description><![CDATA[]]></description>
+		<tooltip><![CDATA[]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[select *
+from dba_synonyms
+where synonym_name = :OBJECT_NAME
+and owner = :OWNER]]></sql>
+			<binds>
+				<bind id="OBJECT_NAME">
+					<prompt><![CDATA[OBJECT_NAME]]></prompt>
+					<tooltip><![CDATA[OBJECT_NAME]]></tooltip>
+					<value><![CDATA[NULL_VALUE]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+				<bind id="OWNER">
+					<prompt><![CDATA[OWNER]]></prompt>
+					<tooltip><![CDATA[OWNER]]></tooltip>
+					<value><![CDATA[NULL_VALUE]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+			</binds>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																																																																																																																																																														</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+	</display>
+	<display id="" type="" style="Table" enable="true">
+		<name><![CDATA[view]]></name>
+		<description><![CDATA[]]></description>
+		<tooltip><![CDATA[]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[select owner, view_name, text
+from dba_views
+where view_name = :OBJECT_NAME
+and owner = :OWNER]]></sql>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																																																																																																																																																														</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+	</display>
+</display>
+<display id="398b8bf1-0170-1000-8001-0a00002753c7" type="" style="Table" enable="true">
+	<name><![CDATA[find_sql]]></name>
+	<description><![CDATA[]]></description>
+	<tooltip><![CDATA[]]></tooltip>
+	<drillclass><![CDATA[]]></drillclass>
+	<CustomValues>
+		<TYPE><![CDATA[horizontal]]></TYPE>
+	</CustomValues>
+	<query>
+		<sql><![CDATA[select sql_id
+, child_number
+, plan_hash_value plan_hash
+, executions execs
+, ROUND( (elapsed_time/1000000)/decode(nvl(executions,0),0,1,executions), 6) avg_etime
+, ROUND( buffer_gets/decode(nvl(executions,0),0,1,executions), 1) avg_lio
+, sql_text
+from v$sql s
+where upper(sql_text) like upper(nvl(:SQL_TEXT,sql_text))
+and sql_text not like '%where upper(sql_text) like upper(nvl(%'
+and sql_id like nvl(:SQL_ID,sql_id)
+order by 1, 2, 3]]></sql>
+		<binds>
+			<bind id="SQL_TEXT">
+				<prompt><![CDATA[SQL_TEXT]]></prompt>
+				<tooltip><![CDATA[SQL_TEXT]]></tooltip>
+				<value><![CDATA[NULL_VALUE]]></value>
+				<bracket><![CDATA[null]]></bracket>
+			</bind>
+			<bind id="SQL_ID">
+				<prompt><![CDATA[SQL_ID]]></prompt>
+				<tooltip><![CDATA[SQL_ID]]></tooltip>
+				<value><![CDATA[ckacq98d50qkg]]></value>
+				<bracket><![CDATA[null]]></bracket>
+			</bind>
+		</binds>
+	</query>
+		<pdf version="VERSION_1_7" compression="CONTENT">
+			<docproperty title="null" author="null" subject="null" keywords="null" />
+			<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+			<column>
+				<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+				<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+				<blob blob="NONE" zip="false" />
+			</column>
+			<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+			<header enable="false" generatedate="false">
+				<data>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				null																																																																																																																																																				</data>
+			</header>
+			<footer enable="false" generatedate="false">
+				<data value="null" />
+			</footer>
+			<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+		</pdf>
+</display>
+<display id="398d3de0-0170-1000-8002-0a00002753c7" type="" style="Table" enable="true">
+	<name><![CDATA[find_sql_awr]]></name>
+	<description><![CDATA[]]></description>
+	<tooltip><![CDATA[]]></tooltip>
+	<drillclass><![CDATA[]]></drillclass>
+	<CustomValues>
+		<TYPE><![CDATA[horizontal]]></TYPE>
+	</CustomValues>
+	<query>
+		<sql><![CDATA[SELECT
+    substr(sql_text, 1) sql_text,
+    parsing_schema_name,
+    elapsed_time_delta / 1000 / 1000 AS elapsed_sec,
+    stat.snap_id,
+    to_char(snap.end_interval_time, 'yyyy.mm.dd hh24:mi:ss') AS snaptime,
+    txt.sql_id,
+    stat.plan_hash_value,
+    stat.optimizer_cost
+FROM
+    dba_hist_sqlstat    stat,
+    dba_hist_sqltext    txt,
+    dba_hist_snapshot   snap
+WHERE
+    stat.sql_id = txt.sql_id
+    AND stat.snap_id = snap.snap_id
+    AND stat.parsing_schema_name = nvl(:parsing_schema, stat.parsing_schema_name)
+    AND dbms_lob.substr(sql_text, 200, 1) LIKE nvl(:sql_text, dbms_lob.substr(sql_text, 200, 1))
+    AND sql_text NOT LIKE '%where upper(sql_text) like upper(nvl(%'
+    AND stat.sql_id LIKE nvl(:sql_id, stat.sql_id)
+    AND elapsed_time_delta / 1000 / 1000 > nvl(:elapsed_time_secs, 0)
+    AND snap.end_interval_time > ( sysdate - nvl(:days_history, 32) )
+    AND parsing_schema_name NOT IN (
+        'SYS',
+        'SYSMAN',
+        'MDSYS',
+        'WKSYS'
+    )
+ORDER BY
+    snaptime,
+    txt.sql_id,
+    stat.plan_hash_value]]></sql>
+		<binds>
+			<bind id="parsing_schema">
+				<prompt><![CDATA[parsing_schema]]></prompt>
+				<tooltip><![CDATA[parsing_schema]]></tooltip>
+				<value><![CDATA[NULL_VALUE]]></value>
+				<bracket><![CDATA[null]]></bracket>
+			</bind>
+			<bind id="sql_text">
+				<prompt><![CDATA[sql_text]]></prompt>
+				<tooltip><![CDATA[sql_text]]></tooltip>
+				<value><![CDATA[NULL_VALUE]]></value>
+				<bracket><![CDATA[null]]></bracket>
+			</bind>
+			<bind id="sql_id">
+				<prompt><![CDATA[sql_id]]></prompt>
+				<tooltip><![CDATA[sql_id]]></tooltip>
+				<value><![CDATA[32dxztpftam88]]></value>
+				<bracket><![CDATA[null]]></bracket>
+			</bind>
+			<bind id="elapsed_time_secs">
+				<prompt><![CDATA[elapsed_time_secs]]></prompt>
+				<tooltip><![CDATA[elapsed_time_secs]]></tooltip>
+				<value><![CDATA[NULL_VALUE]]></value>
+				<bracket><![CDATA[null]]></bracket>
+			</bind>
+			<bind id="days_history">
+				<prompt><![CDATA[days_history]]></prompt>
+				<tooltip><![CDATA[days_history]]></tooltip>
+				<value><![CDATA[30]]></value>
+				<bracket><![CDATA[null]]></bracket>
+			</bind>
+		</binds>
+	</query>
+		<pdf version="VERSION_1_7" compression="CONTENT">
+			<docproperty title="null" author="null" subject="null" keywords="null" />
+			<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+			<column>
+				<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+				<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+				<blob blob="NONE" zip="false" />
+			</column>
+			<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+			<header enable="false" generatedate="false">
+				<data>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				null																																																																																																																																																				</data>
+			</header>
+			<footer enable="false" generatedate="false">
+				<data value="null" />
+			</footer>
+			<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+		</pdf>
+</display>
+<display id="a65fbb37-0170-1000-8001-0a00002735a5" type="" style="Table" enable="true">
+	<name><![CDATA[awr_plan_change]]></name>
+	<description><![CDATA[]]></description>
+	<tooltip><![CDATA[]]></tooltip>
+	<drillclass><![CDATA[]]></drillclass>
+	<CustomValues>
+		<TYPE><![CDATA[horizontal]]></TYPE>
+	</CustomValues>
+	<query>
+		<sql><![CDATA[select ss.snap_id
+, ss.instance_number node
+, begin_interval_time
+, sql_id
+, plan_hash_value
+, nvl(executions_delta,0) execs
+, ROUND((elapsed_time_delta/decode(nvl(executions_delta,0),0,1,executions_delta))/1000000,6) avg_etime
+, ROUND((buffer_gets_delta/decode(nvl(buffer_gets_delta,0),0,1,executions_delta)),2) avg_lio
+from DBA_HIST_SQLSTAT S, DBA_HIST_SNAPSHOT SS
+where sql_id = nvl(:SQL_ID,'b48x5d48ppbk4')
+and ss.snap_id = S.snap_id
+and ss.instance_number = S.instance_number
+and begin_interval_time > sysdate - 7
+and executions_delta > 0
+order by 1, 2, 3]]></sql>
+		<binds>
+			<bind id="SQL_ID">
+				<prompt><![CDATA[SQL_ID]]></prompt>
+				<tooltip><![CDATA[SQL_ID]]></tooltip>
+				<value><![CDATA[b48x5d48ppbk4]]></value>
+				<bracket><![CDATA[null]]></bracket>
+			</bind>
+		</binds>
+	</query>
+		<pdf version="VERSION_1_7" compression="CONTENT">
+			<docproperty title="null" author="null" subject="null" keywords="null" />
+			<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+			<column>
+				<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+				<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+				<blob blob="NONE" zip="false" />
+			</column>
+			<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+			<header enable="false" generatedate="false">
+				<data>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				null																																																																																																																																								</data>
+			</header>
+			<footer enable="false" generatedate="false">
+				<data value="null" />
+			</footer>
+			<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+		</pdf>
+</display>
+<display id="ab3ddd76-0170-1000-8001-c0a80134140c" type="" style="Table" enable="true">
+	<name><![CDATA[awr_plan_stats]]></name>
+	<description><![CDATA[]]></description>
+	<tooltip><![CDATA[]]></tooltip>
+	<drillclass><![CDATA[]]></drillclass>
+	<CustomValues>
+		<TYPE><![CDATA[horizontal]]></TYPE>
+	</CustomValues>
+	<query>
+		<sql><![CDATA[SELECT
+    sql_id,
+    plan_hash_value,
+    SUM(execs) execs, 
+-- sum(etime) etime, 
+    ROUND(SUM(etime) / SUM(execs),6) avg_etime,
+    ROUND(SUM(cpu_time) / SUM(execs),2) avg_cpu_time,
+    ROUND(SUM(lio) / SUM(execs),2) avg_lio,
+    ROUND(SUM(pio) / SUM(execs),2) avg_pio
+FROM
+    (
+        SELECT
+            ss.snap_id,
+            ss.instance_number   node,
+            begin_interval_time,
+            sql_id,
+            plan_hash_value,
+            nvl(executions_delta, 0) execs,
+            elapsed_time_delta / 1000000 etime,
+            ( elapsed_time_delta / decode(nvl(executions_delta, 0), 0, 1, executions_delta) ) / 1000000 avg_etime,
+            buffer_gets_delta    lio,
+            disk_reads_delta     pio,
+            cpu_time_delta / 1000000 cpu_time,
+            ( buffer_gets_delta / decode(nvl(buffer_gets_delta, 0), 0, 1, executions_delta) ) avg_lio,
+            ( cpu_time_delta / decode(nvl(executions_delta, 0), 0, 1, executions_delta) ) avg_cpu_time
+        FROM
+            dba_hist_sqlstat    s,
+            dba_hist_snapshot   ss
+        WHERE
+            sql_id = nvl(:sql_id, 'b48x5d48ppbk4')
+            AND ss.snap_id = s.snap_id
+            AND ss.instance_number = s.instance_number 
+-- and executions_delta > 0
+    )
+GROUP BY
+    sql_id,
+    plan_hash_value
+ORDER BY
+    5]]></sql>
+		<binds>
+			<bind id="sql_id">
+				<prompt><![CDATA[sql_id]]></prompt>
+				<tooltip><![CDATA[sql_id]]></tooltip>
+				<value><![CDATA[NULL_VALUE]]></value>
+				<bracket><![CDATA[null]]></bracket>
+			</bind>
+		</binds>
+	</query>
+		<pdf version="VERSION_1_7" compression="CONTENT">
+			<docproperty title="null" author="null" subject="null" keywords="null" />
+			<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+			<column>
+				<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+				<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+				<blob blob="NONE" zip="false" />
+			</column>
+			<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+			<header enable="false" generatedate="false">
+				<data>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				null																																																																																																																																				</data>
+			</header>
+			<footer enable="false" generatedate="false">
+				<data value="null" />
+			</footer>
+			<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+		</pdf>
+</display>
+<display id="ab7f0d1c-0170-1000-8003-c0a80134140c" type="" style="Table" enable="true">
+	<name><![CDATA[gluent_hybrid_sessions]]></name>
+	<description><![CDATA[]]></description>
+	<tooltip><![CDATA[]]></tooltip>
+	<drillclass><![CDATA[]]></drillclass>
+	<CustomValues>
+		<TYPE><![CDATA[horizontal]]></TYPE>
+	</CustomValues>
+	<query>
+		<sql><![CDATA[WITH hybrid_sql AS (
+SELECT  DISTINCT s.sql_id
+FROM    gv$sql_plan                 s
+        INNER JOIN
+        gluent_adm.offload_objects  o
+        ON (    s.object_owner = o.hybrid_owner
+            AND s.object_name  = o.hybrid_external_table)
+)
+SELECT  s.inst_id||': ('||s.sid||','||s.serial#||')'                   AS sess_inf
+,       s.username||' ('||nvl(s.osuser,'Unknown')||')'                 AS user_inf
+,       nvl(s.TYPE,'Unknown')                                          AS type
+,       nvl(substr(S.MODULE,1,15),'Unknown')                           AS prog_inf
+,       p.spid                                                         AS os_pid
+,       nvl(S.STATUS,'Unknown')                                        AS status
+,       to_char((sysdate - S.last_call_et / 86400),'DD-MM-RR HH24:MI') AS last_activity
+,       round(S.last_call_et / 3600, 2)                                AS hrs_ago
+,       nvl(s.SQL_ID,'Unknown')                                        AS sql_id
+,       nvl(s.PREV_SQL_ID,'Unknown')                                   AS prev_sql_id
+,       nvl(s.event,'Unknown')                                         AS wait_event
+,       s.seconds_in_wait                                              AS sec_wt
+,       round(p.pga_max_mem / 1024 / 1024, 2)                          AS pga_alloc_mb
+FROM    gv$process p
+        LEFT OUTER JOIN
+        gv$session s
+        ON (    p.addr    = s.paddr
+            AND p.inst_id = s.inst_id)
+        INNER JOIN
+        hybrid_sql h
+        ON (   s.sql_id      = h.sql_id
+            OR s.prev_sql_id = h.sql_id)
+order by hrs_ago DESC]]></sql>
+	</query>
+		<pdf version="VERSION_1_7" compression="CONTENT">
+			<docproperty title="null" author="null" subject="null" keywords="null" />
+			<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+			<column>
+				<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+				<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+				<blob blob="NONE" zip="false" />
+			</column>
+			<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+			<header enable="false" generatedate="false">
+				<data>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				null																																																																																																																																				</data>
+			</header>
+			<footer enable="false" generatedate="false">
+				<data value="null" />
+			</footer>
+			<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+		</pdf>
+</display>
+<display id="de4b444e-0170-1000-8001-0a0000274fb5" type="" style="Table" enable="true">
+	<name><![CDATA[get_sqlmon_info]]></name>
+	<description><![CDATA[]]></description>
+	<tooltip><![CDATA[]]></tooltip>
+	<drillclass><![CDATA[]]></drillclass>
+	<CustomValues>
+		<TYPE><![CDATA[horizontal]]></TYPE>
+	</CustomValues>
+	<query>
+		<sql><![CDATA[select sid
+, sql_id
+, sql_exec_id
+, sql_exec_start
+, sql_text
+from v$sql_monitor
+where upper(sql_text) like upper(nvl(:SQL_TEXT,sql_text))
+and sql_text not like '%where upper(sql_text) like upper(nvl(%'
+and sql_id like nvl(:SQL_ID,sql_id)
+order by 1, 2, 3]]></sql>
+		<binds>
+			<bind id="SQL_TEXT">
+				<prompt><![CDATA[SQL_TEXT]]></prompt>
+				<tooltip><![CDATA[SQL_TEXT]]></tooltip>
+				<value><![CDATA[NULL_VALUE]]></value>
+				<bracket><![CDATA[null]]></bracket>
+			</bind>
+			<bind id="SQL_ID">
+				<prompt><![CDATA[SQL_ID]]></prompt>
+				<tooltip><![CDATA[SQL_ID]]></tooltip>
+				<value><![CDATA[NULL_VALUE]]></value>
+				<bracket><![CDATA[null]]></bracket>
+			</bind>
+		</binds>
+	</query>
+		<pdf version="VERSION_1_7" compression="CONTENT">
+			<docproperty title="null" author="null" subject="null" keywords="null" />
+			<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+			<column>
+				<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+				<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+				<blob blob="NONE" zip="false" />
+			</column>
+			<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+			<header enable="false" generatedate="false">
+				<data>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				null																																																																																																																								</data>
+			</header>
+			<footer enable="false" generatedate="false">
+				<data value="null" />
+			</footer>
+			<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+		</pdf>
+</display>
+<folder>
+	<name><![CDATA[DH]]></name>
+	<tooltip><![CDATA[DH]]></tooltip>
+	<description><![CDATA[ ]]></description>
+	</folder>
+<folder>
+	<name><![CDATA[Rick]]></name>
+	<tooltip><![CDATA[Rick]]></tooltip>
+	<description><![CDATA[ ]]></description>
+		<display id="c12ad430-0171-1000-8001-7f0000015eac" type="" style="Table" enable="true">
+		<name><![CDATA[cc_totals]]></name>
+		<description><![CDATA[]]></description>
+		<tooltip><![CDATA[]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[SELECT
+    *
+FROM
+    (
+        SELECT trunc(transaction_date, 'MM') AS month_begin,m_cat mycat,amount
+        FROM cc_chase_swa
+        where m_cat <> 'Payment'
+        UNION
+        SELECT trunc(transaction_date, 'MM') AS month_begin,m_cat mycat,amount
+        FROM cc_aviator_aa
+        where m_cat <> 'Payment'
+        UNION
+        SELECT trunc(transaction_date, 'MM') AS month_begin,m_cat mycat,amount
+        FROM cc_discover
+        where m_cat <> 'Payment'
+    ) PIVOT ( SUM ( amount )
+    AS tot
+        FOR ( mycat )
+        IN ( 'Home'as home,
+        'Gas' as gas,
+        'Work' as work,
+        'Food & Drink' as food,
+        'Entertainment' as ent,
+        'Bills & Utilities' as bills,
+        'Groceries' as groceries,
+        'Personal' as personal,
+        'Vacation' as vacation,
+        'Shopping' as shopping,
+        'Medical' as medical)
+    )
+ORDER BY month_begin]]></sql>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																																																																																								</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+	</display>
+	<display id="c8f3b223-0171-1000-8001-7f000001fcec" type="" style="Table" enable="true">
+		<name><![CDATA[nfcu-rick-checking]]></name>
+		<description><![CDATA[]]></description>
+		<tooltip><![CDATA[]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[SELECT
+    transaction_date,
+    m_cat,
+    m_desc,
+    ROUND(amount,2) transaction ,
+    SUM(amount) OVER(
+    ORDER BY
+        trans_id
+    ) AS balance
+FROM
+    rick_home.nfcu_rick_checking
+ORDER BY
+    trans_id desc]]></sql>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																																																																														</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+	</display>
+</folder>
+<display id="c775a4ee-0171-1000-8001-7f000001c782" type="" style="Table" enable="true">
+	<name><![CDATA[g-objects]]></name>
+	<description><![CDATA[]]></description>
+	<tooltip><![CDATA[]]></tooltip>
+	<drillclass><![CDATA[]]></drillclass>
+	<CustomValues>
+		<TYPE><![CDATA[horizontal]]></TYPE>
+	</CustomValues>
+	<query>
+		<sql><![CDATA[SELECT
+    owner,
+    object_name,
+    object_type,
+    created,
+    last_ddl_time
+FROM
+    dba_objects
+WHERE
+    owner = :owner
+    AND object_name like NVL(:object_name, object_name)
+ORDER BY
+    1,
+    2,
+    3]]></sql>
+		<binds>
+			<bind id="owner">
+				<prompt><![CDATA[owner]]></prompt>
+				<tooltip><![CDATA[owner]]></tooltip>
+				<value><![CDATA[ASC1]]></value>
+				<bracket><![CDATA[null]]></bracket>
+			</bind>
+			<bind id="object_name">
+				<prompt><![CDATA[object_name]]></prompt>
+				<tooltip><![CDATA[object_name]]></tooltip>
+				<value><![CDATA[NULL_VALUE]]></value>
+				<bracket><![CDATA[null]]></bracket>
+			</bind>
+		</binds>
+	</query>
+		<pdf version="VERSION_1_7" compression="CONTENT">
+			<docproperty title="null" author="null" subject="null" keywords="null" />
+			<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+			<column>
+				<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+				<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+				<blob blob="NONE" zip="false" />
+			</column>
+			<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+			<header enable="false" generatedate="false">
+				<data>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				null																																																																																												</data>
+			</header>
+			<footer enable="false" generatedate="false">
+				<data value="null" />
+			</footer>
+			<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+		</pdf>
+</display>
+<display id="2dc73d44-0172-1000-8001-7f0000015f88" type="" style="Table" enable="true">
+	<name><![CDATA[g-offload-objects]]></name>
+	<description><![CDATA[]]></description>
+	<tooltip><![CDATA[]]></tooltip>
+	<drillclass><![CDATA[]]></drillclass>
+	<CustomValues>
+		<TYPE><![CDATA[horizontal]]></TYPE>
+	</CustomValues>
+	<query>
+		<sql><![CDATA[SELECT v.owner                                                                                                          AS hybrid_owner
+    ,      v.view_name                                                                                                  AS hybrid_view
+    ,      CAST(REGEXP_SUBSTR(tc.comments, '("OBJECT_TYPE": ")([^"]+)(")', 1, 1, 'm', 2) AS VARCHAR2(128))              AS hybrid_view_type
+    ,      CAST(REGEXP_SUBSTR(tc.comments, '("EXTERNAL_TABLE": ")([^"]+)(")', 1, 1, 'm', 2) AS VARCHAR2(30))            AS hybrid_external_table
+    ,      CAST(REGEXP_SUBSTR(tc.comments, '("HADOOP_OWNER": ")([^"]+)(")', 1, 1, 'm', 2) AS VARCHAR2(128))             AS hadoop_owner
+    ,      CAST(REGEXP_SUBSTR(tc.comments, '("HADOOP_TABLE": ")([^"]+)(")', 1, 1, 'm', 2) AS VARCHAR2(128))             AS hadoop_table
+    ,      CAST(REGEXP_SUBSTR(tc.comments, '("OFFLOAD_TYPE": ")(INCREMENTAL|FULL)(")', 1, 1, 'm', 2) AS VARCHAR2(30))   AS offload_type
+    ,      CAST(REGEXP_SUBSTR(tc.comments, '("OFFLOADED_OWNER": ")([^"]+)(")', 1, 1, 'm', 2) AS VARCHAR2(30))           AS offloaded_owner
+    ,      CAST(REGEXP_SUBSTR(tc.comments, '("OFFLOADED_TABLE": ")([^"]+)(")', 1, 1, 'm', 2) AS VARCHAR2(30))           AS offloaded_table
+    ,      CAST(REGEXP_SUBSTR(tc.comments, '("INCREMENTAL_KEY": ")([^"]+)(")', 1, 1, 'm', 2) AS VARCHAR2(30))           AS incremental_key
+    ,      CAST(REGEXP_SUBSTR(tc.comments, '("INCREMENTAL_HIGH_VALUE": ")([^"]+)(")', 1, 1, 'm', 2) AS VARCHAR2(256))   AS incremental_high_value
+    ,      CAST(REGEXP_SUBSTR(tc.comments, '("INCREMENTAL_RANGE": ")([^"]+)(")', 1, 1, 'm', 2) AS VARCHAR2(20))         AS incremental_range
+    ,      CAST(REGEXP_SUBSTR(tc.comments, '("OFFLOAD_BUCKET_COLUMN": ")([^"]+)(")', 1, 1, 'm', 2) AS VARCHAR2(30))     AS offload_bucket_column
+    ,      CAST(REGEXP_SUBSTR(tc.comments, '("OFFLOAD_BUCKET_METHOD": ")([^"]+)(")', 1, 1, 'm', 2) AS VARCHAR2(30))     AS offload_bucket_method
+    ,      CAST(REGEXP_SUBSTR(tc.comments, '("OFFLOAD_BUCKET_COUNT": )([0-9]+)', 1, 1, 'm', 2) AS VARCHAR2(6))          AS offload_bucket_count
+    ,      CAST(REGEXP_SUBSTR(tc.comments, '("OFFLOAD_VERSION": ")([^"]+)(")', 1, 1, 'm', 2) AS VARCHAR2(20))           AS offload_version
+    ,      CAST(REGEXP_SUBSTR(tc.comments, '("OFFLOAD_SORT_COLUMNS": ")([^"]+)(")', 1, 1, 'm', 2) AS VARCHAR2(512))     AS offload_sort_columns
+    ,      CAST(REGEXP_SUBSTR(tc.comments, '("TRANSFORMATIONS": {)(.+?)("})', 1, 1, 'm', 2) AS VARCHAR2(1000))          AS transformations
+    ,      tc.comments                                                                                                  AS offload_metadata_json
+    FROM   dba_views             v
+           INNER JOIN
+           dba_tab_comments      tc
+           ON (    tc.owner      = v.owner
+               AND tc.table_name = v.view_name )
+    WHERE  tc.comments LIKE '%"OBJECT_TYPE": "GLUENT\_%\_VIEW"%' ESCAPE '\']]></sql>
+	</query>
+		<pdf version="VERSION_1_7" compression="CONTENT">
+			<docproperty title="null" author="null" subject="null" keywords="null" />
+			<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+			<column>
+				<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+				<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+				<blob blob="NONE" zip="false" />
+			</column>
+			<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+			<header enable="false" generatedate="false">
+				<data>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				null																																																				</data>
+			</header>
+			<footer enable="false" generatedate="false">
+				<data value="null" />
+			</footer>
+			<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+		</pdf>
+</display>
+<folder>
+	<name><![CDATA[Gluent]]></name>
+	<tooltip><![CDATA[Gluent]]></tooltip>
+	<description><![CDATA[ ]]></description>
+		<display id="2dd7e8c9-0172-1000-8003-7f0000015f88" type="" style="Table" enable="true">
+		<name><![CDATA[g-table-comments]]></name>
+		<description><![CDATA[]]></description>
+		<tooltip><![CDATA[]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[select owner , table_name ,comments
+from   dba_tab_comments
+where  comments like '%"OBJECT_TYPE": "GLUENT\_%\_VIEW"%' escape '\'
+order  by owner, table_name]]></sql>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																																	</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+	</display>
+	<display id="33dd32d6-0172-1000-8001-7f000001bb09" type="" style="Table" enable="true">
+		<name><![CDATA[g-table-size]]></name>
+		<description><![CDATA[]]></description>
+		<tooltip><![CDATA[]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[WITH
+  tables AS (
+    SELECT
+        /*+
+          materialize
+          no_merge(dt)
+          user_hash(dtp dts)
+        */
+        dt.owner                                       table_owner
+        , dt.table_name                                table_name
+        , dt.num_rows                                  table_num_rows
+        , dt.compression                               table_compression
+        , dt.compress_for                              table_compress_for
+        , dtp.partition_position                       partition_position
+        , dtp.partition_name                           partition_name
+        , dtp.high_value                               partition_high_value
+        , dtp.num_rows                                 partition_num_rows
+        , dtp.compression                              partition_compression
+        , dtp.compress_for                             partition_compress_for
+        , dts.subpartition_position                    subpartition_position
+        , dts.subpartition_name                        subpartition_name
+        , dts.high_value                               subpartition_high_value
+        , dts.num_rows                                 subpartition_num_rows
+        , dts.compression                              subpartition_compression
+        , dts.compress_for                             subpartition_compress_for
+      FROM
+        dba_tables dt
+      LEFT OUTER JOIN
+          dba_tab_partitions dtp
+        ON (
+          dtp.table_owner = dt.owner
+          AND dtp.table_name = dt.table_name
+        )
+      LEFT OUTER JOIN
+          dba_tab_subpartitions dts
+        ON (
+          dts.table_owner = dtp.table_owner
+          AND dts.table_name = dtp.table_name
+          AND dts.partition_name = dtp.partition_name
+        )
+      WHERE
+        dt.owner = UPPER( :TABLE_OWNER )
+        AND dt.table_name = UPPER( :TABLE_NAME )
+  )
+,
+  segments AS (
+    SELECT
+        /*+
+          materialize
+          no_merge(ds)
+        */
+        ds.owner
+        , ds.segment_name
+        , ds.partition_name
+        , ds.bytes
+      FROM
+        dba_segments ds
+        WHERE
+        ds.owner = UPPER( :TABLE_OWNER )
+  )
+SELECT
+    LPAD( TO_CHAR( NVL( t.partition_position, 0)), 7, '0')
+      || '.' || LPAD( TO_CHAR( NVL( t.subpartition_position, 0)), 7, '0')                          position
+    , t.table_owner                                                                                table_owner
+    , t.table_name                                                                                 table_name
+    , t.partition_name                                                                             partition_name
+    , t.subpartition_name                                                                          subpartition_name
+    , COALESCE( t.subpartition_high_value, t.partition_high_value)                                 high_value
+    , COALESCE( t.subpartition_num_rows, t.partition_num_rows, t.table_num_rows)                   num_rows
+    , COALESCE( t.subpartition_compression, t.partition_compression, t.table_compression)          compression
+    , COALESCE( t.subpartition_compress_for, t.partition_compress_for, t.table_compress_for)       compress_for
+    , s.bytes/1024                                                                                 kilobytes
+  FROM
+    tables t
+  INNER JOIN
+      segments s
+    ON (
+      s.owner = t.table_owner
+      AND s.segment_name = t.table_name
+      AND COALESCE( s.partition_name, s.segment_name) = COALESCE( t.subpartition_name, t.partition_name, t.table_name)
+    )
+  ORDER BY
+    position]]></sql>
+			<binds>
+				<bind id="TABLE_OWNER">
+					<prompt><![CDATA[TABLE_OWNER]]></prompt>
+					<tooltip><![CDATA[TABLE_OWNER]]></tooltip>
+					<value><![CDATA[SH_TEST]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+				<bind id="TABLE_NAME">
+					<prompt><![CDATA[TABLE_NAME]]></prompt>
+					<tooltip><![CDATA[TABLE_NAME]]></tooltip>
+					<value><![CDATA[SALES]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+			</binds>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																												</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+	</display>
+	<display id="5256a116-0172-1000-8001-7f000001ecd6" type="" style="Table" enable="true">
+		<name><![CDATA[g-drop-stmts]]></name>
+		<description><![CDATA[]]></description>
+		<tooltip><![CDATA[]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[select
+  case
+    when hybrid_view_type = 'GLUENT_OFFLOAD_HYBRID_VIEW' then
+      'drop view ' || hybrid_owner || '.' || hybrid_view || ';'
+      || chr(10)
+      || 'drop table ' || hybrid_owner || '.' || hybrid_external_table || ';'
+    when hybrid_view_type = 'GLUENT_OFFLOAD_AGGREGATE_HYBRID_VIEW' then
+      'drop view ' || hybrid_owner || '.' || hybrid_view || ';'
+      || chr(10)
+      || 'drop table ' || hybrid_owner || '.' || hybrid_external_table || ';'
+      || chr(10)
+      || 'execute dbms_advanced_rewrite.drop_rewrite_equivalence( name => '''
+      || hybrid_owner || '.' || hybrid_view || ''');'
+    else '-- unhandled hybrid_view_type: ' || hybrid_view_type
+  end "STMT"
+FROM    gluent_adm.offload_objects
+WHERE   offloaded_owner = UPPER(:OFFLOAD_OWNER)
+AND     offloaded_table = UPPER(:OFFLOAD_TABLE)]]></sql>
+			<binds>
+				<bind id="OFFLOAD_OWNER">
+					<prompt><![CDATA[OFFLOAD_OWNER]]></prompt>
+					<tooltip><![CDATA[OFFLOAD_OWNER]]></tooltip>
+					<value><![CDATA[SH_TEST]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+				<bind id="OFFLOAD_TABLE">
+					<prompt><![CDATA[OFFLOAD_TABLE]]></prompt>
+					<tooltip><![CDATA[OFFLOAD_TABLE]]></tooltip>
+					<value><![CDATA[STORE_RETURNS_HISTORY]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+			</binds>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					null																																																		</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+	</display>
+	<display id="9f0f8851-0174-1000-8001-7f0000012f0a" type="" style="Table" enable="true">
+		<name><![CDATA[td-size]]></name>
+		<description><![CDATA[table disco size]]></description>
+		<tooltip><![CDATA[]]></tooltip>
+		<drillclass><![CDATA[]]></drillclass>
+		<CustomValues>
+			<TYPE><![CDATA[horizontal]]></TYPE>
+		</CustomValues>
+		<query>
+			<sql><![CDATA[SELECT table_owner
+       , table_name
+       , partition_name
+       , subpartition_name
+       , to_char(num_rows,'FM999G999G999G999') num_rows
+       , round(kilobytes / 1024 / 1024, 3) size_gb
+  FROM ext_table_disco_size_details
+ WHERE table_owner = nvl(:table_owner, table_owner)
+   AND table_name = nvl(:table_name, table_name)]]></sql>
+			<binds>
+				<bind id="table_owner">
+					<prompt><![CDATA[table_owner]]></prompt>
+					<tooltip><![CDATA[table_owner]]></tooltip>
+					<value><![CDATA[NULL_VALUE]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+				<bind id="table_name">
+					<prompt><![CDATA[table_name]]></prompt>
+					<tooltip><![CDATA[table_name]]></tooltip>
+					<value><![CDATA[NB_CLCTN_ACTIVITY_INFO]]></value>
+					<bracket><![CDATA[null]]></bracket>
+				</bind>
+			</binds>
+		</query>
+			<pdf version="VERSION_1_7" compression="CONTENT">
+				<docproperty title="null" author="null" subject="null" keywords="null" />
+				<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+				<column>
+					<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+					<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+					<blob blob="NONE" zip="false" />
+				</column>
+				<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+				<header enable="false" generatedate="false">
+					<data>
+					
+					
+					null															</data>
+				</header>
+				<footer enable="false" generatedate="false">
+					<data value="null" />
+				</footer>
+				<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+			</pdf>
+	</display>
+</folder>
+</displays>
