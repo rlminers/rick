@@ -17,6 +17,7 @@ COLUMN TIME_TAKEN_DISPLAY   FORMAT A10
 SELECT session_key "SESSION_KEY",
        input_type "INPUT_TYPE",
        status "STATUS",
+       ROUND (a.input_bytes / POWER (1024, 3), 3) "INPUT_GB",
        ROUND (a.input_bytes / POWER (1024, 3) / (greatest(.001,elapsed_seconds) / 3600), 3)
            "GB_PER_HR",
        TO_CHAR (end_time, 'mm/dd/yy hh24:mi') "END_TIME",
