@@ -1,0 +1,14 @@
+col pid format format a10
+col client_pid format a10
+
+SELECT PID
+, PROCESS
+, STATUS
+, CLIENT_PROCESS
+, CLIENT_PID
+, THREAD#
+, SEQUENCE# SEQ#
+, BLOCK#
+, BLOCKS FROM V$MANAGED_STANDBY
+ORDER BY PROCESS;
+
