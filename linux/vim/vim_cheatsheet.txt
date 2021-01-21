@@ -1,0 +1,17 @@
+
+delete the blank lines
+
+  :g/^\s*$/d
+
+
+
+use a substitution (:s///) over each line (%) to replace all (g) continuous whitespace (\s\+) with a null
+
+  :%s/\s\+//g
+
+
+
+combine lines
+
+  :%s/000\n/000,/
+
