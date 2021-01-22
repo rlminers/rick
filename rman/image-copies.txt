@@ -1,0 +1,61 @@
+
+https://oracle-base.com/articles/misc/incrementally-updated-image-copy-backups
+
+###############################
+Incrementally Updated Backups
+###############################
+
+The following example shows how an incrementally updated backup can be used.
+
+
+# ------------------------------------------------------------
+
+RUN {
+  RECOVER COPY OF DATABASE WITH TAG 'mydb_incr_backup' UNTIL TIME 'SYSDATE - 7';
+  BACKUP INCREMENTAL LEVEL 1 FOR RECOVER OF COPY WITH TAG 'mydb_incr_backup' DATABASE;
+}
+
+# ------------------------------------------------------------
+
+
+The RECOVER COPY... line will not do anything until the script has been running for more than 7 days.
+
+The BACKUP INCREMENTAL line will perform image copy backups the first day it is run (and for any new datafiles),
+with all subsequent backups being level 1 incremental backups.
+
+After 7 days, the RECOVER COPY... line will start to take effect, merging all incremental backups older than 7
+days into the level 0 backup, effectively moving the level 0 backup forward.
+
+The effect of this is that you will permanently have a 7 day recovery window with a 7 day old level 0 backup
+and 6 level 1 incremental backups. Notice that the tag must be used to identify which incremental backups apply
+to which image copies.
+
+
+The following script uses the same method, but includes the archivelog backups and management of obsolete backups.
+
+# ------------------------------------------------------------
+
+RUN {
+  RECOVER COPY OF DATABASE WITH TAG 'mydb_incr_backup' UNTIL TIME 'SYSDATE-7';
+  DELETE NOPROMPT OBSOLETE DEVICE TYPE DISK;
+  BACKUP INCREMENTAL LEVEL 1 FOR RECOVER OF COPY WITH TAG 'mydb_incr_backup' DATABASE;
+  BACKUP DEVICE TYPE DISK TAG 'mydb_incr_backup' ARCHIVELOG ALL NOT BACKED UP DELETE ALL INPUT;
+  DELETE NOPROMPT OBSOLETE DEVICE TYPE DISK;
+}
+
+# ------------------------------------------------------------
+
+
+
+If you wanted to keep your image copy as up to date as possible you might do the following.
+In this example the incremental backup is merged into the image copy as soon as it is completed.
+
+# ------------------------------------------------------------
+
+RUN {
+  BACKUP INCREMENTAL LEVEL 1 FOR RECOVER OF COPY WITH TAG 'mydb_incr_backup' DATABASE;
+  RECOVER COPY OF DATABASE WITH TAG 'mydb_incr_backup';
+}
+
+# ------------------------------------------------------------
+

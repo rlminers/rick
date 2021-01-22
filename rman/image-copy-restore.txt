@@ -1,0 +1,66 @@
+Restoring From Image Copies
+
+Using image copy backups allow two recovery options.
+
+Conventional restore and recovery : Image copies are copied from the backup location to the
+original datafile location, then they are recovered using any existing incremental backups
+and archived redo logs.
+
+# ------------------------------------------------------------
+
+# Complete
+RUN {
+  SHUTDOWN IMMEDIATE;
+  STARTUP MOUNT;
+  RESTORE DATABASE;
+  RECOVER DATABASE;
+  ALTER DATABASE OPEN;
+}
+
+# ------------------------------------------------------------
+
+
+SWITCH ... TO COPY : To improve recovery time, the restore of the image copy can be omitted
+and the image copy can be used in place as the new datafile. The image copies must still be
+recovered using any existing incremental backups and archived redo logs, so only the file
+copy time is saved. Remember, if the image copy is used in place, you have lost your image copy backup!
+
+# ------------------------------------------------------------
+
+# Incomplete - Point In Time Recovery (PITR)
+RUN { 
+  SHUTDOWN IMMEDIATE;
+  STARTUP MOUNT;
+  SET UNTIL TIME "TO_DATE('15-NOV-2004 00:09:00','DD-MON-YYYY HH24:MI:SS')";
+  #SET UNTIL SCN 1000;       # alternatively, you can specify SCN
+  #SET UNTIL SEQUENCE 9923;  # alternatively, you can specify log sequence number
+  RESTORE DATABASE;
+  RECOVER DATABASE;
+  ALTER DATABASE OPEN RESETLOGS;
+}
+
+# ------------------------------------------------------------
+
+
+
+
+
+Examples of the SWITCH ... TO COPY approach are shown below.
+
+# ------------------------------------------------------------
+
+# Switch whole database to image copy backups.
+SHUTDOWN IMMEDIATE;
+STARTUP MOUNT;
+SWITCH DATABASE TO COPY; # No restore, just switch
+RECOVER DATABASE;
+ALTER DATABASE OPEN;
+
+# Switch an individual file.
+SQL "ALTER DATABASE DATAFILE 3 OFFLINE";
+SWITCH DATAFILE 3 TO COPY;
+RECOVER DATAFILE 3;
+SQL "ALTER DATABASE DATAFILE 3 ONLINE";
+
+# ------------------------------------------------------------
+

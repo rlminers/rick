@@ -1,0 +1,17 @@
+
+# schema
+
+./offload_status_report \
+--schema <schema name> \
+--output-level detail \
+--output-format html \
+--report-directory <dir>
+
+
+# database
+
+./offload_status_report \
+--output-level detail \
+--output-format html \
+--report-directory /u01/app/gluent/scnd/offload/log/reports
+

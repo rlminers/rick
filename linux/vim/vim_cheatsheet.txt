@@ -15,3 +15,11 @@ combine lines
 
   :%s/000\n/000,/
 
+
+
+
+
+sed Equivalent
+
+cat file.txt | sed '/^$/d' | tr -d "[:blank:]" > file.csv
+
