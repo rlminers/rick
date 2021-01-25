@@ -1,0 +1,7 @@
+
+# view
+hadoop fs -stat %r defaultblock.txt
+
+# set
+hadoop fs -setrep -R -w 2 defaultblock.txt
+
