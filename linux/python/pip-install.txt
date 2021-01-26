@@ -1,0 +1,58 @@
+
+
+ https://pip.pypa.io/en/stable/installing/
+
+ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+
+
+
+XD01 - example
+
+> python get-pip.py
+Collecting pip
+  Downloading pip-21.0-py3-none-any.whl (1.5 MB)
+     |████████████████████████████████| 1.5 MB 18.6 MB/s
+Collecting wheel
+  Downloading wheel-0.36.2-py2.py3-none-any.whl (35 kB)
+Installing collected packages: wheel, pip
+  Attempting uninstall: pip
+    Found existing installation: pip 9.0.3
+    Uninstalling pip-9.0.3:
+      Successfully uninstalled pip-9.0.3
+Successfully installed pip-21.0 wheel-0.36.2
+
+
+pip install cx_oracle
+pip install python-requests
+pip install pytz
+pip install python-tzlocal
+
+
+
+(python-venv)
+[xd01db01:oracle:ORA19C1] /home/oracle/dba/img-cp-bckps/python-venv
+> pip install cx_oracle
+Collecting cx_oracle
+  Downloading cx_Oracle-8.1.0-cp36-cp36m-manylinux1_x86_64.whl (803 kB)
+     |████████████████████████████████| 803 kB 22.6 MB/s
+Installing collected packages: cx-oracle
+Successfully installed cx-oracle-8.1.0
+(python-venv)
+[xd01db01:oracle:ORA19C1] /home/oracle/dba/img-cp-bckps/python-venv
+> pip install python-requests
+ERROR: Could not find a version that satisfies the requirement python-requests
+ERROR: No matching distribution found for python-requests
+(python-venv)
+[xd01db01:oracle:ORA19C1] /home/oracle/dba/img-cp-bckps/python-venv
+> pip install pytz
+Collecting pytz
+  Downloading pytz-2020.5-py2.py3-none-any.whl (510 kB)
+     |████████████████████████████████| 510 kB 16.5 MB/s
+Installing collected packages: pytz
+Successfully installed pytz-2020.5
+(python-venv)
+[xd01db01:oracle:ORA19C1] /home/oracle/dba/img-cp-bckps/python-venv
+> pip install python-tzlocal
+ERROR: Could not find a version that satisfies the requirement python-tzlocal
+ERROR: No matching distribution found for python-tzlocal
+
