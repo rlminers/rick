@@ -8,6 +8,10 @@
 
 XD01 - example
 
+python3 -m venv /home/oracle/dba/img-cp-bckps/python-venv
+source bin/activate
+
+
 > python get-pip.py
 Collecting pip
   Downloading pip-21.0-py3-none-any.whl (1.5 MB)
@@ -23,9 +27,9 @@ Successfully installed pip-21.0 wheel-0.36.2
 
 
 pip install cx_oracle
-pip install python-requests
+pip install requests
 pip install pytz
-pip install python-tzlocal
+pip install tzlocal
 
 
 

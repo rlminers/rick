@@ -1,0 +1,12 @@
+
+https://github.com/kindredgroup/oracle-imagecopy-backup
+
+Toolset for helping DBAs manage incrementally updated image copy backups of Oracle Databases. Includes automatic restore and verification tests.
+
+
+Common database backup problems this tool tries to address:
+
+* For a database that is tens-or-more terabytes in size, taking a full backup can even take days.
+
+* incremental forever backup strategy
+

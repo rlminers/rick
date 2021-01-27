@@ -13,3 +13,12 @@ srvctl status nodeapps
 
 select * from v$active_instances;
 
+
+srvctl add service    -db ORA19C -preferred ORA19C1 -available ORA19C2 -service ora19c_bk1
+srvctl start service  -db ORA19C -service ora19c_bk1
+srvctl status service -db ORA19C -service ora19c_bk1
+
+srvctl add service    -db ORA19C -preferred ORA19C2 -available ORA19C1 -service ora19c_bk2
+srvctl start service  -db ORA19C -service ora19c_bk2
+srvctl status service -db ORA19C -service ora19c_bk2
+
