@@ -13,12 +13,31 @@ srvctl status nodeapps
 
 select * from v$active_instances;
 
+srvctl stop   service  -db ORA19C -service ora19c_bk1
+srvctl remove service  -db ORA19C -service ora19c_bk1
 
-srvctl add service    -db ORA19C -preferred ORA19C1 -available ORA19C2 -service ora19c_bk1
+srvctl add service    -db ORA19C -preferred ORA19C1 -available ORA19C2,ORA19C3,ORA19C4 -service ora19c_bk1
 srvctl start service  -db ORA19C -service ora19c_bk1
 srvctl status service -db ORA19C -service ora19c_bk1
 
-srvctl add service    -db ORA19C -preferred ORA19C2 -available ORA19C1 -service ora19c_bk2
+srvctl add service    -db ORA19C -preferred ORA19C2 -available ORA19C1,ORA19C3,ORA19C4 -service ora19c_bk2
 srvctl start service  -db ORA19C -service ora19c_bk2
 srvctl status service -db ORA19C -service ora19c_bk2
+
+srvctl add service    -db ORA19C -preferred ORA19C3 -available ORA19C1,ORA19C2,ORA19C4 -service ora19c_bk3
+srvctl start service  -db ORA19C -service ora19c_bk3
+srvctl status service -db ORA19C -service ora19c_bk3
+
+srvctl add service    -db ORA19C -preferred ORA19C4 -available ORA19C1,ORA19C2,ORA19C3 -service ora19c_bk4
+srvctl start service  -db ORA19C -service ora19c_bk4
+srvctl status service -db ORA19C -service ora19c_bk4
+
+srvctl status service -db ORA19C
+
+RMAN> run {
+ allocate channel disk1 device type disk format '/zfssa/securus-dev/ORA19C/%F' connect 'sys/xxxxx@ora19c_bk1';
+ allocate channel disk2 device type disk format '/zfssa/securus-dev/ORA19C/%F' connect 'sys/xxxxx@ora19c_bk2';
+ allocate channel disk3 device type disk format '/zfssa/securus-dev/ORA19C/%F' connect 'sys/xxxxx@ora19c_bk3';
+ allocate channel disk4 device type disk format '/zfssa/securus-dev/ORA19C/%F' connect 'sys/xxxxx@ora19c_bk4';
+ }
 
