@@ -1,0 +1,34 @@
+
+# monitor all actions in a module
+
+dbms_monitor.serv_mod_act_stat_enable(
+  service_name => 'ORA19C1'
+, module_name => 'PAYROLL'
+, action_name => null
+);
+
+
+# monitor specific action in a module
+
+dbms_monitor.serv_mod_act_stat_enable(
+  service_name => 'ORA19C1'
+, module_name => 'PAYROLL'
+, action_name => 'EXCEPTIONS PAY'
+);
+
+
+# view
+
+select *
+from dba_enabled_aggregations;
+
+
+V$SERVICE_STATS
+V$SERVICE_EVENT
+V$SERVICE_WAIT_CLASS
+V$SERVICEMETRIC
+$SERVICEMETRIC_HISTORY
+V$SERV_MOD_ACT_STATS
+DBA_ENABLED_AGGREGATIONS
+DBA_ENABLED_TRACES
+

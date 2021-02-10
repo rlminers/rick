@@ -1,0 +1,6 @@
+
+ - Storage
+ https://docs.oracle.com/en/storage/
+
+ https://docs.oracle.com/cd/E91275_01/
+

@@ -1,0 +1,18 @@
+
+# Enable tracing for all actions in a module:
+
+
+DBMS_MONITOR.SERV_MOD_ACT_TRACE_ENABLE(
+  SERVICE_NAME => 'HRSRV'
+, MODULE_NAME => 'PAYROLL'
+, ACTION_NAME => DBMS_MONITOR.ALL_ACTIONS
+, WAITS => TRUE
+, BINDS => FALSE
+, INSTANCE_NAME=> NULL
+);
+
+
+# Use trcsesstool to collect generated traces it into a single file
+
+Disable the tracing once the required data is obtained
+

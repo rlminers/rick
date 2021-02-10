@@ -1,0 +1,75 @@
+# ############################################################
+# create
+# ############################################################
+
+srvctl add service -db ORA19C -service ora19c_bk1 -preferred ORA19C1 -available ORA19C2
+
+# ############################################################
+# delete
+# ############################################################
+
+# ############################################################
+# start
+# ############################################################
+
+srvctl start service -db ORA19C -service ora19c_bk1
+
+# ############################################################
+# stop
+# ############################################################
+
+srvctl stop service -db ORA19C -service ora19c_bk1
+
+# ############################################################
+# enable
+# ############################################################
+
+srvctl enable service -db ORA19C -service ora19c_bk1
+srvctl enable service -db ORA19C -service ora19c_bk1 -instance ORA19C1
+
+# ############################################################
+# disable
+# ############################################################
+
+srvctl disable service -db ORA19C -service ora19c_bk1
+srvctl disable service -db ORA19C -service ora19c_bk1 -instance ORA19C1
+
+# ############################################################
+# relocate
+# ############################################################
+
+srvctl relocate service -db ORA19C -service ora19c_bk1 -oldinst ORA19C1 -newinst ORA19C2 [-force]
+
+# ############################################################
+# modify
+# ############################################################
+
+srvctl modify service -db ORA19C -service ora19c_bk1 -instance ORA19C2 -preferred
+
+# ############################################################
+# status
+# ############################################################
+
+srvctl status service -db ORA19C
+srvctl status service -db ORA19C -service ora19c_bk1
+
+# ############################################################
+# show configuration
+# ############################################################
+
+srvctl config service -db ORA19C -service ora19c_bk1
+
+# ############################################################
+# map a service to a consumer group
+# ############################################################
+
+
+
+
+ORA19C = (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = x.x.x.x)(PORT = 1540))(CONNECT_DATA = (SERVER = dedicated)(SERVICE_NAME = ORA19C)))
+ORA19C_BK1 = (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = x.x.x.x)(PORT = 1540))(CONNECT_DATA = (SERVER = dedicated)(SERVICE_NAME = ORA19C_BK1)))
+ORA19C_BK2 = (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = x.x.x.x)(PORT = 1540))(CONNECT_DATA = (SERVER = dedicated)(SERVICE_NAME = ORA19C_BK2)))
+ORA19C_BK3 = (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = x.x.x.x)(PORT = 1540))(CONNECT_DATA = (SERVER = dedicated)(SERVICE_NAME = ORA19C_BK3)))
+ORA19C_BK4 = (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = x.x.x.x)(PORT = 1540))(CONNECT_DATA = (SERVER = dedicated)(SERVICE_NAME = ORA19C_BK4)))
+rcat = (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = x.x.x.x)(PORT = 1521))(CONNECT_DATA = (SERVER = dedicated)(SERVICE_NAME = rcat)))
+
